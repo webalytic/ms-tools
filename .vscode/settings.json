@@ -1,0 +1,14 @@
+{
+  "eslint.validate": [
+    "typescript",
+    "json",
+    "javascript"
+  ],
+  "eslint.format.enable": true,
+  "eslint.workingDirectories": [
+    "."
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
