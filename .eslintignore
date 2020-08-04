@@ -1,12 +1,1 @@
-fixes
-test
-src/api
-src/db
-src/jobs
-src/loaders
-src/services
-src/storage
-src/temp
-src/utils
-src/errors.js
 package.json

@@ -1,4 +1,4 @@
-import * as ClickHouse from '@apla/clickhouse'
+import ClickHouse from '@apla/clickhouse'
 
 const clickhouse = new ClickHouse({
   host: process.env.CLICKHOUSE_HOST || 'localhost',
