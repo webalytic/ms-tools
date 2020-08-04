@@ -1,13 +1,11 @@
 .DS_Store
 node_modules
-data
-./packages/**/node_modules
-./src/**/node_modules
-src/server/src/temp
 yarn-debug.log*
 yarn-error.log*
 /test/unit/coverage
 coverage
+lib
+
 # Editor directories and files
 .idea
 *.suo
