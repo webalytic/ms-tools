@@ -1,9 +1,10 @@
 {
   "name": "@webalytic/ms-tools",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Shared lib, reusable infrastructure classes",
   "scripts": {
     "build": "rm -rf lib/* && tsc --project ./tsconfig.json",
+    "prepare": "npm run build",
     "test:unit": "mocha -r ts-node/register/transpile-only --timeout 15000 ./src/**/*.test.ts"
   },
   "files": [
