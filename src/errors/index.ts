@@ -1,3 +1,6 @@
+/* eslint-disable max-classes-per-file */
+import { ValidationError as ValidationErrorFastest } from 'fastest-validator'
+
 export class UnauthorizedError extends Error {
   status: number
 
@@ -9,6 +12,7 @@ export class UnauthorizedError extends Error {
 
 export class ForbiddenError extends Error {
   status: number
+
   constructor() {
     super('Forbidden')
     this.status = 403
@@ -17,6 +21,7 @@ export class ForbiddenError extends Error {
 
 export class InternalServerError extends Error {
   status: number
+
   constructor() {
     super('InternalServer')
     this.status = 500
@@ -25,6 +30,7 @@ export class InternalServerError extends Error {
 
 export class NotFoundError extends Error {
   status: number
+
   constructor() {
     super('NotFound')
     this.status = 404
@@ -33,30 +39,36 @@ export class NotFoundError extends Error {
 
 export class BadRequestError extends Error {
   status: number
+
   constructor(msg: string) {
     super(msg)
     this.status = 400
   }
 }
 
+interface ValidationErrorExtension {
+  type: string
+  field: string
+  message: string
+}
+
 export class ValidationError extends Error {
   status: number
+
   extensions: any
-  constructor(extensions: any) {
+
+  constructor(extensions: ValidationErrorExtension[]) {
     super('ValidationError')
     this.extensions = extensions
     this.status = 422
   }
 }
 
-export function createJoiValidationError(err: any) {
-  if (!err.isJoi) throw new Error('Incorrect error type for createJoiValidationError')
-
-  const extensions = err.details.reduce((obj: any, item: any) => {
-    const field = item.path.length > 0 ? item.path.join('.') : item.context.label
-    obj[field] = item.type.split('.').pop()
-    return obj
-  }, {})
-
-  return new ValidationError(extensions)
+export function createFastesValidationError(errors: ValidationErrorFastest[]): ValidationError {
+  return new ValidationError(errors.map((err) =>
+    ({
+      type: err.type,
+      field: err.field,
+      message: err.message || ''
+    })))
 }

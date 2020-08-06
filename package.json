@@ -1,6 +1,6 @@
 {
   "name": "@webalytic/ms-tools",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Shared lib, reusable infrastructure classes",
   "scripts": {
     "build": "rm -rf lib/* && tsc --project ./tsconfig.json",
@@ -23,6 +23,7 @@
     "@typescript-eslint/parser": "^3.8.0",
     "chai": "^4.2.0",
     "colors": "^1.4.0",
+    "fastest-validator": "^1.5.1",
     "ioredis": "^4.17.3",
     "mocha": "^8.1.0",
     "moment": "^2.27.0",
