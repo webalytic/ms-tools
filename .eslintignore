@@ -1,1 +1,3 @@
 package.json
+
+shared/value-objects/*
