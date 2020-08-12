@@ -5,30 +5,30 @@ import * as rimraf from 'rimraf'
 
 // https://github.com/shelljs/shelljs/issues/469
 process.env.PATH += (path.delimiter + path.join(process.cwd(), 'node_modules', '.bin'))
-
 const PROTO_DIR = path.join(__dirname, '../node_modules/@webalytic/protorepo')
-
 const SHARED_DIR = path.join(__dirname, '../shared')
-const VO_DIR = path.join(SHARED_DIR, '/value-objects')
 
-rimraf.sync(`${VO_DIR}/*`)
+rimraf.sync(`${SHARED_DIR}/common/*`)
 
-const PROTO_EVENTS = [
-  {
-    js: `${VO_DIR}/error.js`,
-    ts: `${VO_DIR}/error.d.ts`,
-    proto: [
-      `${PROTO_DIR}/shared/error.proto`
-    ].join(' ')
+function buildClasess() {
+  const PROTO_FILES = [
+    ['/common', '/error.proto']
+  ]
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const fileTuple of PROTO_FILES) {
+    const [dir, file] = fileTuple
+    const js = `${SHARED_DIR}${dir}${file.replace('.proto', '.js')}`
+    const ts = `${SHARED_DIR}${dir}${file.replace('.proto', '.d.ts')}`
+    const proto = `${PROTO_DIR}${dir}${file}`
+
+    shell.exec('pbjs '
+    + '-t static-module '
+    + '-w commonjs '
+    + `-o ${js} ${proto}`)
+
+    shell.exec(`pbts -o ${ts} ${js}`)
   }
-]
-
-// eslint-disable-next-line no-restricted-syntax
-for (const protoEvent of PROTO_EVENTS) {
-  shell.exec('pbjs '
-  + '-t static-module '
-  + '-w commonjs '
-  + `-o ${protoEvent.js} ${protoEvent.proto}`)
-
-  shell.exec(`pbts -o ${protoEvent.ts} ${protoEvent.js}`)
 }
+
+buildClasess()
