@@ -1,3 +1,3 @@
-export { default as sequelize } from './sequelize'
-export { default as clickhouse } from './clickhouse'
-export { default as redis } from './redis'
+export { default as createSequelize } from './sequelize'
+export { default as createClickhouse } from './clickhouse'
+export { default as createRedis } from './redis'
