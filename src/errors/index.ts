@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
 
 import { ValidationError as ValidationErrorFastest } from 'fastest-validator'
-import { error } from '@shared/common/error'
+import { error } from '../../shared/common/error'
 
 export class ValidationError extends error.Error {
   constructor(details: any) {
