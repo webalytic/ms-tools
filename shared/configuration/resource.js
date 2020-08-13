@@ -28,8 +28,8 @@ $root.resource = (function() {
          * @property {string|null} [name] ResourceProps name
          * @property {resource.ResourceCategory|null} [category] ResourceProps category
          * @property {string|null} [defaultWebsiteUrl] ResourceProps defaultWebsiteUrl
-         * @property {string|null} [createAt] ResourceProps createAt
-         * @property {string|null} [updateAt] ResourceProps updateAt
+         * @property {number|Long|null} [createTime] ResourceProps createTime
+         * @property {number|Long|null} [updateTime] ResourceProps updateTime
          */
 
         /**
@@ -80,20 +80,20 @@ $root.resource = (function() {
         ResourceProps.prototype.defaultWebsiteUrl = "";
 
         /**
-         * ResourceProps createAt.
-         * @member {string} createAt
+         * ResourceProps createTime.
+         * @member {number|Long} createTime
          * @memberof resource.ResourceProps
          * @instance
          */
-        ResourceProps.prototype.createAt = "";
+        ResourceProps.prototype.createTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
-         * ResourceProps updateAt.
-         * @member {string} updateAt
+         * ResourceProps updateTime.
+         * @member {number|Long} updateTime
          * @memberof resource.ResourceProps
          * @instance
          */
-        ResourceProps.prototype.updateAt = "";
+        ResourceProps.prototype.updateTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new ResourceProps instance using the specified properties.
@@ -127,10 +127,10 @@ $root.resource = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.category);
             if (message.defaultWebsiteUrl != null && Object.hasOwnProperty.call(message, "defaultWebsiteUrl"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.defaultWebsiteUrl);
-            if (message.createAt != null && Object.hasOwnProperty.call(message, "createAt"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.createAt);
-            if (message.updateAt != null && Object.hasOwnProperty.call(message, "updateAt"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.updateAt);
+            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.createTime);
+            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.updateTime);
             return writer;
         };
 
@@ -178,10 +178,10 @@ $root.resource = (function() {
                     message.defaultWebsiteUrl = reader.string();
                     break;
                 case 5:
-                    message.createAt = reader.string();
+                    message.createTime = reader.int64();
                     break;
                 case 6:
-                    message.updateAt = reader.string();
+                    message.updateTime = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -260,12 +260,12 @@ $root.resource = (function() {
             if (message.defaultWebsiteUrl != null && message.hasOwnProperty("defaultWebsiteUrl"))
                 if (!$util.isString(message.defaultWebsiteUrl))
                     return "defaultWebsiteUrl: string expected";
-            if (message.createAt != null && message.hasOwnProperty("createAt"))
-                if (!$util.isString(message.createAt))
-                    return "createAt: string expected";
-            if (message.updateAt != null && message.hasOwnProperty("updateAt"))
-                if (!$util.isString(message.updateAt))
-                    return "updateAt: string expected";
+            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                if (!$util.isInteger(message.createTime) && !(message.createTime && $util.isInteger(message.createTime.low) && $util.isInteger(message.createTime.high)))
+                    return "createTime: integer|Long expected";
+            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                if (!$util.isInteger(message.updateTime) && !(message.updateTime && $util.isInteger(message.updateTime.low) && $util.isInteger(message.updateTime.high)))
+                    return "updateTime: integer|Long expected";
             return null;
         };
 
@@ -397,10 +397,24 @@ $root.resource = (function() {
             }
             if (object.defaultWebsiteUrl != null)
                 message.defaultWebsiteUrl = String(object.defaultWebsiteUrl);
-            if (object.createAt != null)
-                message.createAt = String(object.createAt);
-            if (object.updateAt != null)
-                message.updateAt = String(object.updateAt);
+            if (object.createTime != null)
+                if ($util.Long)
+                    (message.createTime = $util.Long.fromValue(object.createTime)).unsigned = false;
+                else if (typeof object.createTime === "string")
+                    message.createTime = parseInt(object.createTime, 10);
+                else if (typeof object.createTime === "number")
+                    message.createTime = object.createTime;
+                else if (typeof object.createTime === "object")
+                    message.createTime = new $util.LongBits(object.createTime.low >>> 0, object.createTime.high >>> 0).toNumber();
+            if (object.updateTime != null)
+                if ($util.Long)
+                    (message.updateTime = $util.Long.fromValue(object.updateTime)).unsigned = false;
+                else if (typeof object.updateTime === "string")
+                    message.updateTime = parseInt(object.updateTime, 10);
+                else if (typeof object.updateTime === "number")
+                    message.updateTime = object.updateTime;
+                else if (typeof object.updateTime === "object")
+                    message.updateTime = new $util.LongBits(object.updateTime.low >>> 0, object.updateTime.high >>> 0).toNumber();
             return message;
         };
 
@@ -422,8 +436,16 @@ $root.resource = (function() {
                 object.name = "";
                 object.category = options.enums === String ? "UNSPECIFIED" : 0;
                 object.defaultWebsiteUrl = "";
-                object.createAt = "";
-                object.updateAt = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.createTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.createTime = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.updateTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.updateTime = options.longs === String ? "0" : 0;
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
@@ -433,10 +455,16 @@ $root.resource = (function() {
                 object.category = options.enums === String ? $root.resource.ResourceCategory[message.category] : message.category;
             if (message.defaultWebsiteUrl != null && message.hasOwnProperty("defaultWebsiteUrl"))
                 object.defaultWebsiteUrl = message.defaultWebsiteUrl;
-            if (message.createAt != null && message.hasOwnProperty("createAt"))
-                object.createAt = message.createAt;
-            if (message.updateAt != null && message.hasOwnProperty("updateAt"))
-                object.updateAt = message.updateAt;
+            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                if (typeof message.createTime === "number")
+                    object.createTime = options.longs === String ? String(message.createTime) : message.createTime;
+                else
+                    object.createTime = options.longs === String ? $util.Long.prototype.toString.call(message.createTime) : options.longs === Number ? new $util.LongBits(message.createTime.low >>> 0, message.createTime.high >>> 0).toNumber() : message.createTime;
+            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                if (typeof message.updateTime === "number")
+                    object.updateTime = options.longs === String ? String(message.updateTime) : message.updateTime;
+                else
+                    object.updateTime = options.longs === String ? $util.Long.prototype.toString.call(message.updateTime) : options.longs === Number ? new $util.LongBits(message.updateTime.low >>> 0, message.updateTime.high >>> 0).toNumber() : message.updateTime;
             return object;
         };
 

@@ -13,15 +13,15 @@ message TrafficSource {
   string medium = 3; 
   string keyword = 4; 
   string content = 5; 
-  string referralPath = 6; 
+  string referral_path = 6; 
 }
 
 message Device {
   string browser = 1; 
-  string browserVersion = 2;
-  string operatingSystem = 3;
-  string operatingSystemVersion = 4;
-  string deviceCategory = 5;
+  string browser_version = 2;
+  string operating_system = 3;
+  string operating_system_version = 4;
+  string device_category = 5;
 }
 
 message GeoNetwork {

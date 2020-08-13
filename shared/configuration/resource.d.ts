@@ -17,11 +17,11 @@ export namespace resource {
         /** ResourceProps defaultWebsiteUrl */
         defaultWebsiteUrl?: (string|null);
 
-        /** ResourceProps createAt */
-        createAt?: (string|null);
+        /** ResourceProps createTime */
+        createTime?: (number|Long|null);
 
-        /** ResourceProps updateAt */
-        updateAt?: (string|null);
+        /** ResourceProps updateTime */
+        updateTime?: (number|Long|null);
     }
 
     /** Represents a ResourceProps. */
@@ -45,11 +45,11 @@ export namespace resource {
         /** ResourceProps defaultWebsiteUrl. */
         public defaultWebsiteUrl: string;
 
-        /** ResourceProps createAt. */
-        public createAt: string;
+        /** ResourceProps createTime. */
+        public createTime: (number|Long);
 
-        /** ResourceProps updateAt. */
-        public updateAt: string;
+        /** ResourceProps updateTime. */
+        public updateTime: (number|Long);
 
         /**
          * Creates a new ResourceProps instance using the specified properties.

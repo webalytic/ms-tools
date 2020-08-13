@@ -6,21 +6,21 @@ message ResourceProps {
   string id = 1;
   string name = 2;
   ResourceCategory category = 3;
-  string defaultWebsiteUrl = 4;
-  string createAt = 5;
-  string updateAt = 6;
+  string default_website_url = 4;
+  int64 create_time = 5; // Unix timestamp
+  int64 update_time = 6; // Unix timestamp
 }
 
 message CreateResourceInput { 
   string name = 1;
   ResourceCategory category = 2;
-  string defaultWebsiteUrl = 3;
+  string default_website_url = 3;
 }
 
 message UpdateResourceInput { 
   string name = 1;
   resource.ResourceCategory category = 2;
-  string defaultWebsiteUrl = 3;
+  string default_website_url = 3;
 }
 
 

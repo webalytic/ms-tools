@@ -17,11 +17,11 @@ export namespace resource {
         /** ResourceProps defaultWebsiteUrl */
         defaultWebsiteUrl?: (string|null);
 
-        /** ResourceProps createAt */
-        createAt?: (string|null);
+        /** ResourceProps createTime */
+        createTime?: (number|Long|null);
 
-        /** ResourceProps updateAt */
-        updateAt?: (string|null);
+        /** ResourceProps updateTime */
+        updateTime?: (number|Long|null);
     }
 
     /** Represents a ResourceProps. */
@@ -45,11 +45,11 @@ export namespace resource {
         /** ResourceProps defaultWebsiteUrl. */
         public defaultWebsiteUrl: string;
 
-        /** ResourceProps createAt. */
-        public createAt: string;
+        /** ResourceProps createTime. */
+        public createTime: (number|Long);
 
-        /** ResourceProps updateAt. */
-        public updateAt: string;
+        /** ResourceProps updateTime. */
+        public updateTime: (number|Long);
 
         /**
          * Creates a new ResourceProps instance using the specified properties.
@@ -491,7 +491,7 @@ export class ResourceService extends $protobuf.rpc.Service {
     /**
      * Calls CreateResource.
      * @param request CreateResourceRequest message or plain object
-     * @param callback Node-style callback called with the error, if any, and ResourceProps
+     * @param callback Node-style callback called with the error, if any, and CreateResourceResponse
      */
     public createResource(request: ICreateResourceRequest, callback: ResourceService.CreateResourceCallback): void;
 
@@ -500,12 +500,12 @@ export class ResourceService extends $protobuf.rpc.Service {
      * @param request CreateResourceRequest message or plain object
      * @returns Promise
      */
-    public createResource(request: ICreateResourceRequest): Promise<resource.ResourceProps>;
+    public createResource(request: ICreateResourceRequest): Promise<CreateResourceResponse>;
 
     /**
      * Calls UpdateResource.
      * @param request UpdateResourceRequest message or plain object
-     * @param callback Node-style callback called with the error, if any, and ResourceProps
+     * @param callback Node-style callback called with the error, if any, and UpdateResourceResponse
      */
     public updateResource(request: IUpdateResourceRequest, callback: ResourceService.UpdateResourceCallback): void;
 
@@ -514,7 +514,7 @@ export class ResourceService extends $protobuf.rpc.Service {
      * @param request UpdateResourceRequest message or plain object
      * @returns Promise
      */
-    public updateResource(request: IUpdateResourceRequest): Promise<resource.ResourceProps>;
+    public updateResource(request: IUpdateResourceRequest): Promise<UpdateResourceResponse>;
 }
 
 export namespace ResourceService {
@@ -529,16 +529,16 @@ export namespace ResourceService {
     /**
      * Callback as used by {@link ResourceService#createResource}.
      * @param error Error, if any
-     * @param [response] ResourceProps
+     * @param [response] CreateResourceResponse
      */
-    type CreateResourceCallback = (error: (Error|null), response?: resource.ResourceProps) => void;
+    type CreateResourceCallback = (error: (Error|null), response?: CreateResourceResponse) => void;
 
     /**
      * Callback as used by {@link ResourceService#updateResource}.
      * @param error Error, if any
-     * @param [response] ResourceProps
+     * @param [response] UpdateResourceResponse
      */
-    type UpdateResourceCallback = (error: (Error|null), response?: resource.ResourceProps) => void;
+    type UpdateResourceCallback = (error: (Error|null), response?: UpdateResourceResponse) => void;
 }
 
 /** Properties of a ListResourcesRequest. */
@@ -550,8 +550,8 @@ export interface IListResourcesRequest {
     /** ListResourcesRequest limit */
     limit?: (number|null);
 
-    /** ListResourcesRequest cursor */
-    cursor?: (string|null);
+    /** ListResourcesRequest offset */
+    offset?: (number|null);
 
     /** ListResourcesRequest orderBy */
     orderBy?: (string|null);
@@ -572,8 +572,8 @@ export class ListResourcesRequest implements IListResourcesRequest {
     /** ListResourcesRequest limit. */
     public limit: number;
 
-    /** ListResourcesRequest cursor. */
-    public cursor: string;
+    /** ListResourcesRequest offset. */
+    public offset: number;
 
     /** ListResourcesRequest orderBy. */
     public orderBy: string;
@@ -656,10 +656,7 @@ export interface IListResourcesResponse {
     resources?: (resource.IResourceProps[]|null);
 
     /** ListResourcesResponse count */
-    count?: (string|null);
-
-    /** ListResourcesResponse cursor */
-    cursor?: (string|null);
+    count?: (number|null);
 }
 
 /** Represents a ListResourcesResponse. */
@@ -675,10 +672,7 @@ export class ListResourcesResponse implements IListResourcesResponse {
     public resources: resource.IResourceProps[];
 
     /** ListResourcesResponse count. */
-    public count: string;
-
-    /** ListResourcesResponse cursor. */
-    public cursor: string;
+    public count: number;
 
     /**
      * Creates a new ListResourcesResponse instance using the specified properties.
