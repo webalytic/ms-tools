@@ -44,7 +44,7 @@ export function createServer(implementation: any): Server {
 }
 
 export function createClient(): ResourceService {
-  const protoDescriptor: any = getProtoDescriptor
+  const protoDescriptor: any = getProtoDescriptor()
 
   const addresInfo = getAddresInfo()
   const client: Client = new protoDescriptor.ResourceService(
