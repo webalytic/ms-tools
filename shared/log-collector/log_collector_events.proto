@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import public "log-processing/session.proto";
+
+message LogCollectedEventPayload {
+  // ** General
+  string resource_id = 1;
+
+  // ** User
+  string client_id = 2;
+  string user_id = 3;
+
+   // ** Session
+  string session_control = 4;
+  string ip = 5;
+  string user_agent = 6;
+
+  // ** Traffic Sources
+  string document_referrer = 7;
+  string campaign_name = 8;
+  string campaign_source = 9;
+  string campaign_medium = 10;
+  string campaign_keyword = 11;
+  string campaign_content = 12;
+  string campaign_id = 13;
+
+  // ** System Info
+  string screen_resolution = 14;
+  string viewport_size = 15;
+   
+  // ** Content Information
+  string document_location = 16;
+
+  // ** Hit
+  session.Hit hit = 17;
+}

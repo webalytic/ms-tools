@@ -12,7 +12,13 @@
     "outDir": "lib",
     "strict": true,
     "esModuleInterop": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "baseUrl": "./src",
+    "paths": {
+      "@shared/*": [
+        "../shared/*"
+      ]
+    }
   },
   "include": [
     "./src"

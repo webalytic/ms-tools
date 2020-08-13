@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package resource;
+
+message ResourceProps { 
+  string id = 1;
+  string name = 2;
+  ResourceCategory category = 3;
+  string defaultWebsiteUrl = 4;
+  string createAt = 5;
+  string updateAt = 6;
+}
+
+message CreateResourceInput { 
+  string name = 1;
+  ResourceCategory category = 2;
+  string defaultWebsiteUrl = 3;
+}
+
+message UpdateResourceInput { 
+  string name = 1;
+  resource.ResourceCategory category = 2;
+  string defaultWebsiteUrl = 3;
+}
+
+
+message ResourceFilter {
+  string id = 1;
+  string name = 2;
+}
+
+enum ResourceCategory {
+  UNSPECIFIED = 0;
+  ARTS_AND_ENTERTAINMENT = 1;
+  AUTOMOTIVE = 2;
+  BEAUTY_AND_FITNESS = 3;
+  BOOKS_AND_LITERATURE = 4;
+  BUSINESS_AND_INDUSTRIAL_MARKETS = 5;
+  TECHNOLOGY = 6;
+  FINANCE = 7;
+  FOOD_AND_DRINK = 8;
+  GAMES = 9;
+  HEALTHCARE = 10;
+  HOBBIES_AND_LEISURE = 11;
+  HOME_AND_GARDEN = 12;
+  INTERNET_AND_TELECOM = 13;
+  JOBS_AND_EDUCATION = 14;
+  LAW_AND_GOVERNMENT = 15;
+  NEWS = 16;
+  ONLINE_COMMUNITIES = 17;
+  PEOPLE_AND_SOCIETY = 18;
+  PETS_AND_ANIMALS = 19;
+  REAL_ESTATE = 20;
+  REFERENCE = 21;
+  SCIENCE = 22;
+  SHOPPING = 23;
+  SPORTS = 24;
+  TRAVEL = 25;
+  OTHER = 26;
+}
+
+

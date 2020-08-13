@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+import public "log-processing/session.proto";
+
+message SessionCreatedEventPayload {
+  session.Hit hit = 1;
+  session.SessionProps props = 2;
+}
+
+message SessionUpdatedEventPayload {
+  session.Hit hit = 1;
+  session.SessionProps props = 2;
+  session.SessionProps prevProps = 3;
+}

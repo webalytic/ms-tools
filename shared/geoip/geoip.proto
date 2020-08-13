@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+service Geoip {
+  rpc LookUp (LookUpRequest) returns (LookUpResponse);
+}
+
+message LookUpRequest {
+  string ip = 1;
+}
+
+message LookUpResponse {
+  string country = 1;
+  string city = 2;  
+}

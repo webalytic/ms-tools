@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+package session;
+
+message SessionTotals {
+  int32 hits = 6;
+  int32 pageviews = 7;
+}
+
+message TrafficSource {
+  string source = 1; 
+  string campaign = 2; 
+  string medium = 3; 
+  string keyword = 4; 
+  string content = 5; 
+  string referralPath = 6; 
+}
+
+message Device {
+  string browser = 1; 
+  string browserVersion = 2;
+  string operatingSystem = 3;
+  string operatingSystemVersion = 4;
+  string deviceCategory = 5;
+}
+
+message GeoNetwork {
+  string country = 1;
+  string region = 2;
+  string city = 3;
+}
+
+message SessionProps { 
+  string resource_id = 1;
+  string date = 2; 
+  string user_id = 3;
+  string client_id = 4;
+  string session_id = 5;
+  string session_start_time = 6; 
+  SessionTotals totals = 7;
+  TrafficSource traffic_source = 8;
+  Device device = 9; 
+  GeoNetwork geoNetwork = 10;
+}
+
+message Product {
+  string product_sku = 1;
+  string product_name = 2;
+  string product_brand = 3;
+  string product_category = 4;
+  string product_variant = 5;
+  int32 product_price = 6;
+  int32 product_quantity = 7;
+  string product_coupon_code = 8;
+}
+
+message Hit {
+  string time = 1;
+  string type = 2;
+  string data_source = 3;
+
+  // ** Pageview
+  string page_url = 4;
+
+  // ** Events
+  string event_category = 5;
+  string event_action = 6;
+  string event_label = 7;
+  int32 event_value = 8;
+
+  // ** Enhanced E-Commerce
+  string transaction_id = 9;
+  string transaction_affiliation = 10;
+  int32 transaction_revenue = 11;
+  string product_action =  12;
+  repeated Product productsList = 13;
+}

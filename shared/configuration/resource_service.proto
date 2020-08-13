@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+import public "configuration/resource.proto";
+
+service ResourceService {
+  rpc ListResources (ListResourcesRequest) returns (ListResourcesResponse);
+  rpc CreateResource (CreateResourceRequest) returns (resource.ResourceProps);
+  rpc UpdateResource (UpdateResourceRequest) returns (resource.ResourceProps);
+}
+
+message ListResourcesRequest {
+  resource.ResourceFilter filter = 1; 
+  int32 limit = 2;
+  string cursor = 3;
+  string order_by = 4; // Example: 'id desc' or 'id asc,name desc'
+}
+
+message ListResourcesResponse {
+  repeated resource.ResourceProps resources = 1;
+  string count = 2;
+  string cursor = 3;
+}
+
+message CreateResourceRequest {
+  resource.CreateResourceInput data = 1;
+}
+
+message CreateResourceResponse {
+  resource.ResourceProps instance = 1;
+}
+
+message UpdateResourceRequest {
+  string id = 1;
+  resource.UpdateResourceInput data = 2;
+}
+
+message UpdateResourceResponse {
+  resource.ResourceProps instance = 1;
+}
+
+
