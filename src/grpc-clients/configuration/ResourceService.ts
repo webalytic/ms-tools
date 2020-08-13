@@ -36,7 +36,7 @@ export function createServer(implementation: any): Server {
   })
 
   server.addService(
-    protoDescriptor.Geoip.service,
+    protoDescriptor.ResourceService.service,
     implementation
   )
 
