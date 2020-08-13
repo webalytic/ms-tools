@@ -2,7 +2,7 @@
 import { credentials, loadPackageDefinition, Client } from 'grpc'
 import * as protoLoader from '@grpc/proto-loader'
 
-import { ResourceService } from '@shared/configuration/resource_service'
+import { ResourceService } from '../../../shared/configuration/resource_service'
 
 const packageDefinition = protoLoader.loadSync([
   `${__dirname}/../../../shared/configuration/resource.proto`,

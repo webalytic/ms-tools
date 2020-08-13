@@ -2,7 +2,7 @@
 import { credentials, loadPackageDefinition, Client } from 'grpc'
 import * as protoLoader from '@grpc/proto-loader'
 
-import { Geoip as GeoipService } from '@shared/geoip/geoip'
+import { Geoip as GeoipService } from '../../../shared/geoip/geoip'
 
 const packageDefinition = protoLoader.loadSync([
   `${__dirname}/../../../shared/geoip/geoip.proto`

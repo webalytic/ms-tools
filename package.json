@@ -1,6 +1,6 @@
 {
   "name": "@webalytic/ms-tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Shared lib, reusable infrastructure classes",
   "scripts": {
     "build": "npm run build:proto && rm -rf lib/* && tsc --project ./tsconfig.json",

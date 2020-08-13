@@ -13,12 +13,7 @@
     "strict": true,
     "esModuleInterop": true,
     "noImplicitAny": false,
-    "baseUrl": "./src",
-    "paths": {
-      "@shared/*": [
-        "../shared/*"
-      ]
-    }
+    "baseUrl": "./src"
   },
   "include": [
     "./src"
