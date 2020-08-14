@@ -30,6 +30,7 @@ export default class EventConsumer implements IEventConsumer {
     })
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
   subscribe(event: string, durableName: string, handler: Function): void {
     const opts = this.nats.subscriptionOptions()
       .setManualAckMode(true)

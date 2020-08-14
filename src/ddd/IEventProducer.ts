@@ -1,4 +1,3 @@
-
 export default interface IEventProducer {
   init(): Promise<void>
   destroy(): Promise<void>
