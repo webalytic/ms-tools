@@ -58,31 +58,11 @@ export function createClientBase<T>(
   return serviceStatic.create(rpcImpl, false, false)
 }
 
-export type MockRule = {
-  method: string
+interface MockRuleCase {
   request: any
   response: any
 }
-
-export function createMockImplements(rules: MockRule[]): any {
-  const rulesByMethods = rules.reduce((acc, rule) => {
-    if (!acc[rule.method]) {
-      acc[rule.method] = {
-        method: rule.method,
-        rules: []
-      }
-    }
-    acc[rule.method].rules.push(rule)
-    return acc
-  }, {})
-
-  const implementation = Object.values(rulesByMethods).reduce((impl: any, rulesByMethod: any) => {
-    // eslint-disable-next-line no-param-reassign
-    impl[rulesByMethod.method] = (request) =>
-      rulesByMethod.rules.find((rule) =>
-        JSON.stringify(rule.request) === JSON.stringify(request))
-    return impl
-  }, {})
-
-  return implementation
+export interface MockRule {
+  method: string
+  cases: MockRuleCase[]
 }

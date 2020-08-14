@@ -4,11 +4,11 @@ import { AddressInfo } from 'net'
 import {
   createServerBase,
   createClientBase,
-  createMockImplements,
   MockRule
 } from '../baseFactories'
 
 import { ResourceService } from '../../../shared/configuration/resource_service'
+import ResourceServiceMock from './ResourceServiceMock'
 
 const PROTO_PATHS = [
   `${__dirname}/../../../shared/configuration/resource.proto`,
@@ -42,6 +42,6 @@ export function createClient(): ResourceService {
 }
 
 export function createMock(rules: MockRule[] = []): Server {
-  const implementation = createMockImplements(rules)
+  const implementation = new ResourceServiceMock(rules)
   return createServer(implementation)
 }

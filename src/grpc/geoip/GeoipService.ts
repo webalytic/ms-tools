@@ -6,9 +6,9 @@ import { AddressInfo } from 'net'
 import {
   createServerBase,
   createClientBase,
-  createMockImplements,
   MockRule
 } from '../baseFactories'
+import GeoipServiceMock from './GeoipServiceMock'
 
 import { Geoip as GeoipService } from '../../../shared/geoip/geoip'
 
@@ -42,6 +42,6 @@ export function createClient(): GeoipService {
 }
 
 export function createMock(rules: MockRule[] = []): Server {
-  const implementation = createMockImplements(rules)
+  const implementation = new GeoipServiceMock(rules)
   return createServer(implementation)
 }
