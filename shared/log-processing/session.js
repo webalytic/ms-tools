@@ -26,6 +26,7 @@ $root.session = (function() {
          * @interface ISessionTotals
          * @property {number|null} [hits] SessionTotals hits
          * @property {number|null} [pageviews] SessionTotals pageviews
+         * @property {number|null} [events] SessionTotals events
          */
 
         /**
@@ -60,6 +61,14 @@ $root.session = (function() {
         SessionTotals.prototype.pageviews = 0;
 
         /**
+         * SessionTotals events.
+         * @member {number} events
+         * @memberof session.SessionTotals
+         * @instance
+         */
+        SessionTotals.prototype.events = 0;
+
+        /**
          * Creates a new SessionTotals instance using the specified properties.
          * @function create
          * @memberof session.SessionTotals
@@ -84,9 +93,11 @@ $root.session = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.hits != null && Object.hasOwnProperty.call(message, "hits"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.hits);
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hits);
             if (message.pageviews != null && Object.hasOwnProperty.call(message, "pageviews"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.pageviews);
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageviews);
+            if (message.events != null && Object.hasOwnProperty.call(message, "events"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.events);
             return writer;
         };
 
@@ -121,11 +132,14 @@ $root.session = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 6:
+                case 1:
                     message.hits = reader.int32();
                     break;
-                case 7:
+                case 2:
                     message.pageviews = reader.int32();
+                    break;
+                case 3:
+                    message.events = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -168,6 +182,9 @@ $root.session = (function() {
             if (message.pageviews != null && message.hasOwnProperty("pageviews"))
                 if (!$util.isInteger(message.pageviews))
                     return "pageviews: integer expected";
+            if (message.events != null && message.hasOwnProperty("events"))
+                if (!$util.isInteger(message.events))
+                    return "events: integer expected";
             return null;
         };
 
@@ -187,6 +204,8 @@ $root.session = (function() {
                 message.hits = object.hits | 0;
             if (object.pageviews != null)
                 message.pageviews = object.pageviews | 0;
+            if (object.events != null)
+                message.events = object.events | 0;
             return message;
         };
 
@@ -206,11 +225,14 @@ $root.session = (function() {
             if (options.defaults) {
                 object.hits = 0;
                 object.pageviews = 0;
+                object.events = 0;
             }
             if (message.hits != null && message.hasOwnProperty("hits"))
                 object.hits = message.hits;
             if (message.pageviews != null && message.hasOwnProperty("pageviews"))
                 object.pageviews = message.pageviews;
+            if (message.events != null && message.hasOwnProperty("events"))
+                object.events = message.events;
             return object;
         };
 
@@ -1050,6 +1072,7 @@ $root.session = (function() {
          * @property {session.ITrafficSource|null} [trafficSource] SessionProps trafficSource
          * @property {session.IDevice|null} [device] SessionProps device
          * @property {session.IGeoNetwork|null} [geoNetwork] SessionProps geoNetwork
+         * @property {number|null} [duration] SessionProps duration
          */
 
         /**
@@ -1148,6 +1171,14 @@ $root.session = (function() {
         SessionProps.prototype.geoNetwork = null;
 
         /**
+         * SessionProps duration.
+         * @member {number} duration
+         * @memberof session.SessionProps
+         * @instance
+         */
+        SessionProps.prototype.duration = 0;
+
+        /**
          * Creates a new SessionProps instance using the specified properties.
          * @function create
          * @memberof session.SessionProps
@@ -1191,6 +1222,8 @@ $root.session = (function() {
                 $root.session.Device.encode(message.device, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             if (message.geoNetwork != null && Object.hasOwnProperty.call(message, "geoNetwork"))
                 $root.session.GeoNetwork.encode(message.geoNetwork, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+            if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
+                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.duration);
             return writer;
         };
 
@@ -1254,6 +1287,9 @@ $root.session = (function() {
                     break;
                 case 10:
                     message.geoNetwork = $root.session.GeoNetwork.decode(reader, reader.uint32());
+                    break;
+                case 11:
+                    message.duration = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1328,6 +1364,9 @@ $root.session = (function() {
                 if (error)
                     return "geoNetwork." + error;
             }
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                if (!$util.isInteger(message.duration))
+                    return "duration: integer expected";
             return null;
         };
 
@@ -1375,6 +1414,8 @@ $root.session = (function() {
                     throw TypeError(".session.SessionProps.geoNetwork: object expected");
                 message.geoNetwork = $root.session.GeoNetwork.fromObject(object.geoNetwork);
             }
+            if (object.duration != null)
+                message.duration = object.duration | 0;
             return message;
         };
 
@@ -1402,6 +1443,7 @@ $root.session = (function() {
                 object.trafficSource = null;
                 object.device = null;
                 object.geoNetwork = null;
+                object.duration = 0;
             }
             if (message.resourceId != null && message.hasOwnProperty("resourceId"))
                 object.resourceId = message.resourceId;
@@ -1423,6 +1465,8 @@ $root.session = (function() {
                 object.device = $root.session.Device.toObject(message.device, options);
             if (message.geoNetwork != null && message.hasOwnProperty("geoNetwork"))
                 object.geoNetwork = $root.session.GeoNetwork.toObject(message.geoNetwork, options);
+            if (message.duration != null && message.hasOwnProperty("duration"))
+                object.duration = message.duration;
             return object;
         };
 

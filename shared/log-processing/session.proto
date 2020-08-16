@@ -3,8 +3,9 @@ syntax = "proto3";
 package session;
 
 message SessionTotals {
-  int32 hits = 6;
-  int32 pageviews = 7;
+  int32 hits = 1;
+  int32 pageviews = 2;
+  int32 events = 3;
 }
 
 message TrafficSource {
@@ -41,6 +42,7 @@ message SessionProps {
   TrafficSource traffic_source = 8;
   Device device = 9; 
   GeoNetwork geoNetwork = 10;
+  int32 duration = 11;
 }
 
 message Product {

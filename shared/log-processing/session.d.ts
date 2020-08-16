@@ -10,6 +10,9 @@ export namespace session {
 
         /** SessionTotals pageviews */
         pageviews?: (number|null);
+
+        /** SessionTotals events */
+        events?: (number|null);
     }
 
     /** Represents a SessionTotals. */
@@ -26,6 +29,9 @@ export namespace session {
 
         /** SessionTotals pageviews. */
         public pageviews: number;
+
+        /** SessionTotals events. */
+        public events: number;
 
         /**
          * Creates a new SessionTotals instance using the specified properties.
@@ -466,6 +472,9 @@ export namespace session {
 
         /** SessionProps geoNetwork */
         geoNetwork?: (session.IGeoNetwork|null);
+
+        /** SessionProps duration */
+        duration?: (number|null);
     }
 
     /** Represents a SessionProps. */
@@ -506,6 +515,9 @@ export namespace session {
 
         /** SessionProps geoNetwork. */
         public geoNetwork?: (session.IGeoNetwork|null);
+
+        /** SessionProps duration. */
+        public duration: number;
 
         /**
          * Creates a new SessionProps instance using the specified properties.

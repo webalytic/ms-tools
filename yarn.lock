@@ -37,16 +37,6 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@grpc/proto-loader@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.3.0.tgz#c127d3859bff895f220453612ba04b923af0c584"
-  integrity sha512-9b8S/V+3W4Gv7G/JKSZ48zApgyYbfIR7mAC9XNnaSWme3zj57MIESu0ELzm9j5oxNIpFG8DgO00iJMIUZ5luqw==
-  dependencies:
-    "@types/lodash" "^4.14.104"
-    "@types/node" "^9.4.6"
-    lodash "^4.17.5"
-    protobufjs "^6.8.6"
-
 "@grpc/proto-loader@^0.5.5":
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.5.5.tgz#6725e7a1827bdf8e92e29fbf4e9ef0203c0906a9"
@@ -156,11 +146,6 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/lodash@^4.14.104":
-  version "4.14.159"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.159.tgz#61089719dc6fdd9c5cb46efc827f2571d1517065"
-  integrity sha512-gF7A72f7WQN33DpqOWw9geApQPh4M3PxluMtaHxWHXEGSN12/WbcEk/eNSqWNQcQhF66VSZ06vCF94CrHwXJDg==
-
 "@types/long@*", "@types/long@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.1.tgz#459c65fa1867dafe6a8f322c4c51695663cc55e9"
@@ -190,11 +175,6 @@
   version "14.0.27"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.27.tgz#a151873af5a5e851b51b3b065c9e63390a9e0eb1"
   integrity sha512-kVrqXhbclHNHGu9ztnAwSncIgJv/FaxmzXJvGXNdcCpV1b8u1/Mi6z6m0vwy0LzKeXFTPLH0NzwmoJ3fNCIq0g==
-
-"@types/node@^9.4.6":
-  version "9.6.57"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.57.tgz#ff4c4ffab747783c0c2ba2e2c20e670da2cbee8d"
-  integrity sha512-588MBlPWKeJFshLmnYbqMEaM3NaJFCVZFgpQ5rQxKCVXMNw2Gs7sTORvCDlaPBP6AabiIvmd22eT9fcIvTeZUw==
 
 "@types/rimraf@^3.0.0":
   version "3.0.0"
@@ -272,9 +252,9 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
-"@webalytic/protorepo@webalytic/protorepo#0.2.6":
-  version "0.2.6"
-  resolved "https://codeload.github.com/webalytic/protorepo/tar.gz/6fe36592f711b09c2be898594f2833ac742d14ca"
+"@webalytic/protorepo@webalytic/protorepo#0.2.7":
+  version "0.2.7"
+  resolved "https://codeload.github.com/webalytic/protorepo/tar.gz/11a8c33d7aa55d3f3835d0624f3af716058a6c81"
 
 abbrev@1:
   version "1.1.1"
@@ -1166,22 +1146,7 @@ growl@1.10.5:
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.5.tgz#f2735dc2283674fa67478b10181059355c369e5e"
   integrity sha512-qBr4OuELkhPenW6goKVXiv47US3clb3/IbuWF9KNKEijAy9oeHxU9IgzjvJhHkUzhaj7rOUD7+YGWqUjLp5oSA==
 
-grpc-kit@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/grpc-kit/-/grpc-kit-0.2.0.tgz#69192859a897340c471cff63549c8a8e81741dce"
-  integrity sha512-SHUUhBIH2XoFrGff3V+XSCF71ZET2YWAjtRMhZnRW+7s7T+zcI84HWFED4sLPGXMokCY064lgleNgwc6D1cc4Q==
-
-grpc-mock@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/grpc-mock/-/grpc-mock-0.7.0.tgz#83b8700112252e218af5963f1b0e504f379438f4"
-  integrity sha512-1qKEZ3gSLut9qMLra0e/bQuDNDxOZtcinGjyDnB7NlHU+zuhhHC+jFoj/2Z4pe0zkgLkcTmSq6/YaKr1XExyew==
-  dependencies:
-    "@grpc/proto-loader" "^0.3.0"
-    grpc "^1.17.0"
-    grpc-kit "^0.2.0"
-    partial-compare "^1.0.1"
-
-grpc@^1.17.0, grpc@^1.24.3:
+grpc@^1.24.3:
   version "1.24.3"
   resolved "https://registry.yarnpkg.com/grpc/-/grpc-1.24.3.tgz#92efe28dfc1250dca179b8133e40b4f2341473d9"
   integrity sha512-EDemzuZTfhM0hgrXqC4PtR76O3t+hTIYJYR5vgiW0yt2WJqo4mhxUqZUirzUQz34Psz7dbLp38C6Cl7Ij2vXRQ==
@@ -1563,11 +1528,6 @@ lodash@^4.17.15:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
-
-lodash@^4.17.5:
-  version "4.17.20"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
-  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
 log-symbols@3.0.0:
   version "3.0.0"
@@ -1973,11 +1933,6 @@ parse-json@^2.2.0:
   integrity sha1-9ID0BDTvgHQfhGkJn43qGPVaTck=
   dependencies:
     error-ex "^1.2.0"
-
-partial-compare@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/partial-compare/-/partial-compare-1.0.1.tgz#68ac1b864e463b713e65931d2083c1560608833a"
-  integrity sha1-aKwbhk5GO3E+ZZMdIIPBVgYIgzo=
 
 path-exists@^3.0.0:
   version "3.0.0"
