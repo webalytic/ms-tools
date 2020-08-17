@@ -2303,25 +2303,26 @@ $root.session = (function() {
     return session;
 })();
 
-$root.SessionCreatedEventPayload = (function() {
+$root.LogProcessedEventPayload = (function() {
 
     /**
-     * Properties of a SessionCreatedEventPayload.
-     * @exports ISessionCreatedEventPayload
-     * @interface ISessionCreatedEventPayload
-     * @property {session.IHit|null} [hit] SessionCreatedEventPayload hit
-     * @property {session.ISessionProps|null} [props] SessionCreatedEventPayload props
+     * Properties of a LogProcessedEventPayload.
+     * @exports ILogProcessedEventPayload
+     * @interface ILogProcessedEventPayload
+     * @property {session.IHit|null} [hit] LogProcessedEventPayload hit
+     * @property {session.ISessionProps|null} [props] LogProcessedEventPayload props
+     * @property {session.ISessionProps|null} [prevProps] LogProcessedEventPayload prevProps
      */
 
     /**
-     * Constructs a new SessionCreatedEventPayload.
-     * @exports SessionCreatedEventPayload
-     * @classdesc Represents a SessionCreatedEventPayload.
-     * @implements ISessionCreatedEventPayload
+     * Constructs a new LogProcessedEventPayload.
+     * @exports LogProcessedEventPayload
+     * @classdesc Represents a LogProcessedEventPayload.
+     * @implements ILogProcessedEventPayload
      * @constructor
-     * @param {ISessionCreatedEventPayload=} [properties] Properties to set
+     * @param {ILogProcessedEventPayload=} [properties] Properties to set
      */
-    function SessionCreatedEventPayload(properties) {
+    function LogProcessedEventPayload(properties) {
         if (properties)
             for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                 if (properties[keys[i]] != null)
@@ -2329,272 +2330,51 @@ $root.SessionCreatedEventPayload = (function() {
     }
 
     /**
-     * SessionCreatedEventPayload hit.
+     * LogProcessedEventPayload hit.
      * @member {session.IHit|null|undefined} hit
-     * @memberof SessionCreatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @instance
      */
-    SessionCreatedEventPayload.prototype.hit = null;
+    LogProcessedEventPayload.prototype.hit = null;
 
     /**
-     * SessionCreatedEventPayload props.
+     * LogProcessedEventPayload props.
      * @member {session.ISessionProps|null|undefined} props
-     * @memberof SessionCreatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @instance
      */
-    SessionCreatedEventPayload.prototype.props = null;
+    LogProcessedEventPayload.prototype.props = null;
 
     /**
-     * Creates a new SessionCreatedEventPayload instance using the specified properties.
-     * @function create
-     * @memberof SessionCreatedEventPayload
-     * @static
-     * @param {ISessionCreatedEventPayload=} [properties] Properties to set
-     * @returns {SessionCreatedEventPayload} SessionCreatedEventPayload instance
-     */
-    SessionCreatedEventPayload.create = function create(properties) {
-        return new SessionCreatedEventPayload(properties);
-    };
-
-    /**
-     * Encodes the specified SessionCreatedEventPayload message. Does not implicitly {@link SessionCreatedEventPayload.verify|verify} messages.
-     * @function encode
-     * @memberof SessionCreatedEventPayload
-     * @static
-     * @param {ISessionCreatedEventPayload} message SessionCreatedEventPayload message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    SessionCreatedEventPayload.encode = function encode(message, writer) {
-        if (!writer)
-            writer = $Writer.create();
-        if (message.hit != null && Object.hasOwnProperty.call(message, "hit"))
-            $root.session.Hit.encode(message.hit, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-        if (message.props != null && Object.hasOwnProperty.call(message, "props"))
-            $root.session.SessionProps.encode(message.props, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-        return writer;
-    };
-
-    /**
-     * Encodes the specified SessionCreatedEventPayload message, length delimited. Does not implicitly {@link SessionCreatedEventPayload.verify|verify} messages.
-     * @function encodeDelimited
-     * @memberof SessionCreatedEventPayload
-     * @static
-     * @param {ISessionCreatedEventPayload} message SessionCreatedEventPayload message or plain object to encode
-     * @param {$protobuf.Writer} [writer] Writer to encode to
-     * @returns {$protobuf.Writer} Writer
-     */
-    SessionCreatedEventPayload.encodeDelimited = function encodeDelimited(message, writer) {
-        return this.encode(message, writer).ldelim();
-    };
-
-    /**
-     * Decodes a SessionCreatedEventPayload message from the specified reader or buffer.
-     * @function decode
-     * @memberof SessionCreatedEventPayload
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @param {number} [length] Message length if known beforehand
-     * @returns {SessionCreatedEventPayload} SessionCreatedEventPayload
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    SessionCreatedEventPayload.decode = function decode(reader, length) {
-        if (!(reader instanceof $Reader))
-            reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SessionCreatedEventPayload();
-        while (reader.pos < end) {
-            var tag = reader.uint32();
-            switch (tag >>> 3) {
-            case 1:
-                message.hit = $root.session.Hit.decode(reader, reader.uint32());
-                break;
-            case 2:
-                message.props = $root.session.SessionProps.decode(reader, reader.uint32());
-                break;
-            default:
-                reader.skipType(tag & 7);
-                break;
-            }
-        }
-        return message;
-    };
-
-    /**
-     * Decodes a SessionCreatedEventPayload message from the specified reader or buffer, length delimited.
-     * @function decodeDelimited
-     * @memberof SessionCreatedEventPayload
-     * @static
-     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {SessionCreatedEventPayload} SessionCreatedEventPayload
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    SessionCreatedEventPayload.decodeDelimited = function decodeDelimited(reader) {
-        if (!(reader instanceof $Reader))
-            reader = new $Reader(reader);
-        return this.decode(reader, reader.uint32());
-    };
-
-    /**
-     * Verifies a SessionCreatedEventPayload message.
-     * @function verify
-     * @memberof SessionCreatedEventPayload
-     * @static
-     * @param {Object.<string,*>} message Plain object to verify
-     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-     */
-    SessionCreatedEventPayload.verify = function verify(message) {
-        if (typeof message !== "object" || message === null)
-            return "object expected";
-        if (message.hit != null && message.hasOwnProperty("hit")) {
-            var error = $root.session.Hit.verify(message.hit);
-            if (error)
-                return "hit." + error;
-        }
-        if (message.props != null && message.hasOwnProperty("props")) {
-            var error = $root.session.SessionProps.verify(message.props);
-            if (error)
-                return "props." + error;
-        }
-        return null;
-    };
-
-    /**
-     * Creates a SessionCreatedEventPayload message from a plain object. Also converts values to their respective internal types.
-     * @function fromObject
-     * @memberof SessionCreatedEventPayload
-     * @static
-     * @param {Object.<string,*>} object Plain object
-     * @returns {SessionCreatedEventPayload} SessionCreatedEventPayload
-     */
-    SessionCreatedEventPayload.fromObject = function fromObject(object) {
-        if (object instanceof $root.SessionCreatedEventPayload)
-            return object;
-        var message = new $root.SessionCreatedEventPayload();
-        if (object.hit != null) {
-            if (typeof object.hit !== "object")
-                throw TypeError(".SessionCreatedEventPayload.hit: object expected");
-            message.hit = $root.session.Hit.fromObject(object.hit);
-        }
-        if (object.props != null) {
-            if (typeof object.props !== "object")
-                throw TypeError(".SessionCreatedEventPayload.props: object expected");
-            message.props = $root.session.SessionProps.fromObject(object.props);
-        }
-        return message;
-    };
-
-    /**
-     * Creates a plain object from a SessionCreatedEventPayload message. Also converts values to other types if specified.
-     * @function toObject
-     * @memberof SessionCreatedEventPayload
-     * @static
-     * @param {SessionCreatedEventPayload} message SessionCreatedEventPayload
-     * @param {$protobuf.IConversionOptions} [options] Conversion options
-     * @returns {Object.<string,*>} Plain object
-     */
-    SessionCreatedEventPayload.toObject = function toObject(message, options) {
-        if (!options)
-            options = {};
-        var object = {};
-        if (options.defaults) {
-            object.hit = null;
-            object.props = null;
-        }
-        if (message.hit != null && message.hasOwnProperty("hit"))
-            object.hit = $root.session.Hit.toObject(message.hit, options);
-        if (message.props != null && message.hasOwnProperty("props"))
-            object.props = $root.session.SessionProps.toObject(message.props, options);
-        return object;
-    };
-
-    /**
-     * Converts this SessionCreatedEventPayload to JSON.
-     * @function toJSON
-     * @memberof SessionCreatedEventPayload
-     * @instance
-     * @returns {Object.<string,*>} JSON object
-     */
-    SessionCreatedEventPayload.prototype.toJSON = function toJSON() {
-        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-    };
-
-    return SessionCreatedEventPayload;
-})();
-
-$root.SessionUpdatedEventPayload = (function() {
-
-    /**
-     * Properties of a SessionUpdatedEventPayload.
-     * @exports ISessionUpdatedEventPayload
-     * @interface ISessionUpdatedEventPayload
-     * @property {session.IHit|null} [hit] SessionUpdatedEventPayload hit
-     * @property {session.ISessionProps|null} [props] SessionUpdatedEventPayload props
-     * @property {session.ISessionProps|null} [prevProps] SessionUpdatedEventPayload prevProps
-     */
-
-    /**
-     * Constructs a new SessionUpdatedEventPayload.
-     * @exports SessionUpdatedEventPayload
-     * @classdesc Represents a SessionUpdatedEventPayload.
-     * @implements ISessionUpdatedEventPayload
-     * @constructor
-     * @param {ISessionUpdatedEventPayload=} [properties] Properties to set
-     */
-    function SessionUpdatedEventPayload(properties) {
-        if (properties)
-            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                if (properties[keys[i]] != null)
-                    this[keys[i]] = properties[keys[i]];
-    }
-
-    /**
-     * SessionUpdatedEventPayload hit.
-     * @member {session.IHit|null|undefined} hit
-     * @memberof SessionUpdatedEventPayload
-     * @instance
-     */
-    SessionUpdatedEventPayload.prototype.hit = null;
-
-    /**
-     * SessionUpdatedEventPayload props.
-     * @member {session.ISessionProps|null|undefined} props
-     * @memberof SessionUpdatedEventPayload
-     * @instance
-     */
-    SessionUpdatedEventPayload.prototype.props = null;
-
-    /**
-     * SessionUpdatedEventPayload prevProps.
+     * LogProcessedEventPayload prevProps.
      * @member {session.ISessionProps|null|undefined} prevProps
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @instance
      */
-    SessionUpdatedEventPayload.prototype.prevProps = null;
+    LogProcessedEventPayload.prototype.prevProps = null;
 
     /**
-     * Creates a new SessionUpdatedEventPayload instance using the specified properties.
+     * Creates a new LogProcessedEventPayload instance using the specified properties.
      * @function create
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @static
-     * @param {ISessionUpdatedEventPayload=} [properties] Properties to set
-     * @returns {SessionUpdatedEventPayload} SessionUpdatedEventPayload instance
+     * @param {ILogProcessedEventPayload=} [properties] Properties to set
+     * @returns {LogProcessedEventPayload} LogProcessedEventPayload instance
      */
-    SessionUpdatedEventPayload.create = function create(properties) {
-        return new SessionUpdatedEventPayload(properties);
+    LogProcessedEventPayload.create = function create(properties) {
+        return new LogProcessedEventPayload(properties);
     };
 
     /**
-     * Encodes the specified SessionUpdatedEventPayload message. Does not implicitly {@link SessionUpdatedEventPayload.verify|verify} messages.
+     * Encodes the specified LogProcessedEventPayload message. Does not implicitly {@link LogProcessedEventPayload.verify|verify} messages.
      * @function encode
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @static
-     * @param {ISessionUpdatedEventPayload} message SessionUpdatedEventPayload message or plain object to encode
+     * @param {ILogProcessedEventPayload} message LogProcessedEventPayload message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    SessionUpdatedEventPayload.encode = function encode(message, writer) {
+    LogProcessedEventPayload.encode = function encode(message, writer) {
         if (!writer)
             writer = $Writer.create();
         if (message.hit != null && Object.hasOwnProperty.call(message, "hit"))
@@ -2607,33 +2387,33 @@ $root.SessionUpdatedEventPayload = (function() {
     };
 
     /**
-     * Encodes the specified SessionUpdatedEventPayload message, length delimited. Does not implicitly {@link SessionUpdatedEventPayload.verify|verify} messages.
+     * Encodes the specified LogProcessedEventPayload message, length delimited. Does not implicitly {@link LogProcessedEventPayload.verify|verify} messages.
      * @function encodeDelimited
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @static
-     * @param {ISessionUpdatedEventPayload} message SessionUpdatedEventPayload message or plain object to encode
+     * @param {ILogProcessedEventPayload} message LogProcessedEventPayload message or plain object to encode
      * @param {$protobuf.Writer} [writer] Writer to encode to
      * @returns {$protobuf.Writer} Writer
      */
-    SessionUpdatedEventPayload.encodeDelimited = function encodeDelimited(message, writer) {
+    LogProcessedEventPayload.encodeDelimited = function encodeDelimited(message, writer) {
         return this.encode(message, writer).ldelim();
     };
 
     /**
-     * Decodes a SessionUpdatedEventPayload message from the specified reader or buffer.
+     * Decodes a LogProcessedEventPayload message from the specified reader or buffer.
      * @function decode
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
      * @param {number} [length] Message length if known beforehand
-     * @returns {SessionUpdatedEventPayload} SessionUpdatedEventPayload
+     * @returns {LogProcessedEventPayload} LogProcessedEventPayload
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    SessionUpdatedEventPayload.decode = function decode(reader, length) {
+    LogProcessedEventPayload.decode = function decode(reader, length) {
         if (!(reader instanceof $Reader))
             reader = $Reader.create(reader);
-        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.SessionUpdatedEventPayload();
+        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.LogProcessedEventPayload();
         while (reader.pos < end) {
             var tag = reader.uint32();
             switch (tag >>> 3) {
@@ -2655,30 +2435,30 @@ $root.SessionUpdatedEventPayload = (function() {
     };
 
     /**
-     * Decodes a SessionUpdatedEventPayload message from the specified reader or buffer, length delimited.
+     * Decodes a LogProcessedEventPayload message from the specified reader or buffer, length delimited.
      * @function decodeDelimited
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @static
      * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-     * @returns {SessionUpdatedEventPayload} SessionUpdatedEventPayload
+     * @returns {LogProcessedEventPayload} LogProcessedEventPayload
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    SessionUpdatedEventPayload.decodeDelimited = function decodeDelimited(reader) {
+    LogProcessedEventPayload.decodeDelimited = function decodeDelimited(reader) {
         if (!(reader instanceof $Reader))
             reader = new $Reader(reader);
         return this.decode(reader, reader.uint32());
     };
 
     /**
-     * Verifies a SessionUpdatedEventPayload message.
+     * Verifies a LogProcessedEventPayload message.
      * @function verify
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @static
      * @param {Object.<string,*>} message Plain object to verify
      * @returns {string|null} `null` if valid, otherwise the reason why it is not
      */
-    SessionUpdatedEventPayload.verify = function verify(message) {
+    LogProcessedEventPayload.verify = function verify(message) {
         if (typeof message !== "object" || message === null)
             return "object expected";
         if (message.hit != null && message.hasOwnProperty("hit")) {
@@ -2700,45 +2480,45 @@ $root.SessionUpdatedEventPayload = (function() {
     };
 
     /**
-     * Creates a SessionUpdatedEventPayload message from a plain object. Also converts values to their respective internal types.
+     * Creates a LogProcessedEventPayload message from a plain object. Also converts values to their respective internal types.
      * @function fromObject
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @static
      * @param {Object.<string,*>} object Plain object
-     * @returns {SessionUpdatedEventPayload} SessionUpdatedEventPayload
+     * @returns {LogProcessedEventPayload} LogProcessedEventPayload
      */
-    SessionUpdatedEventPayload.fromObject = function fromObject(object) {
-        if (object instanceof $root.SessionUpdatedEventPayload)
+    LogProcessedEventPayload.fromObject = function fromObject(object) {
+        if (object instanceof $root.LogProcessedEventPayload)
             return object;
-        var message = new $root.SessionUpdatedEventPayload();
+        var message = new $root.LogProcessedEventPayload();
         if (object.hit != null) {
             if (typeof object.hit !== "object")
-                throw TypeError(".SessionUpdatedEventPayload.hit: object expected");
+                throw TypeError(".LogProcessedEventPayload.hit: object expected");
             message.hit = $root.session.Hit.fromObject(object.hit);
         }
         if (object.props != null) {
             if (typeof object.props !== "object")
-                throw TypeError(".SessionUpdatedEventPayload.props: object expected");
+                throw TypeError(".LogProcessedEventPayload.props: object expected");
             message.props = $root.session.SessionProps.fromObject(object.props);
         }
         if (object.prevProps != null) {
             if (typeof object.prevProps !== "object")
-                throw TypeError(".SessionUpdatedEventPayload.prevProps: object expected");
+                throw TypeError(".LogProcessedEventPayload.prevProps: object expected");
             message.prevProps = $root.session.SessionProps.fromObject(object.prevProps);
         }
         return message;
     };
 
     /**
-     * Creates a plain object from a SessionUpdatedEventPayload message. Also converts values to other types if specified.
+     * Creates a plain object from a LogProcessedEventPayload message. Also converts values to other types if specified.
      * @function toObject
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @static
-     * @param {SessionUpdatedEventPayload} message SessionUpdatedEventPayload
+     * @param {LogProcessedEventPayload} message LogProcessedEventPayload
      * @param {$protobuf.IConversionOptions} [options] Conversion options
      * @returns {Object.<string,*>} Plain object
      */
-    SessionUpdatedEventPayload.toObject = function toObject(message, options) {
+    LogProcessedEventPayload.toObject = function toObject(message, options) {
         if (!options)
             options = {};
         var object = {};
@@ -2757,17 +2537,17 @@ $root.SessionUpdatedEventPayload = (function() {
     };
 
     /**
-     * Converts this SessionUpdatedEventPayload to JSON.
+     * Converts this LogProcessedEventPayload to JSON.
      * @function toJSON
-     * @memberof SessionUpdatedEventPayload
+     * @memberof LogProcessedEventPayload
      * @instance
      * @returns {Object.<string,*>} JSON object
      */
-    SessionUpdatedEventPayload.prototype.toJSON = function toJSON() {
+    LogProcessedEventPayload.prototype.toJSON = function toJSON() {
         return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
     };
 
-    return SessionUpdatedEventPayload;
+    return LogProcessedEventPayload;
 })();
 
 module.exports = $root;

@@ -885,199 +885,103 @@ export namespace session {
     }
 }
 
-/** Properties of a SessionCreatedEventPayload. */
-export interface ISessionCreatedEventPayload {
+/** Properties of a LogProcessedEventPayload. */
+export interface ILogProcessedEventPayload {
 
-    /** SessionCreatedEventPayload hit */
+    /** LogProcessedEventPayload hit */
     hit?: (session.IHit|null);
 
-    /** SessionCreatedEventPayload props */
-    props?: (session.ISessionProps|null);
-}
-
-/** Represents a SessionCreatedEventPayload. */
-export class SessionCreatedEventPayload implements ISessionCreatedEventPayload {
-
-    /**
-     * Constructs a new SessionCreatedEventPayload.
-     * @param [properties] Properties to set
-     */
-    constructor(properties?: ISessionCreatedEventPayload);
-
-    /** SessionCreatedEventPayload hit. */
-    public hit?: (session.IHit|null);
-
-    /** SessionCreatedEventPayload props. */
-    public props?: (session.ISessionProps|null);
-
-    /**
-     * Creates a new SessionCreatedEventPayload instance using the specified properties.
-     * @param [properties] Properties to set
-     * @returns SessionCreatedEventPayload instance
-     */
-    public static create(properties?: ISessionCreatedEventPayload): SessionCreatedEventPayload;
-
-    /**
-     * Encodes the specified SessionCreatedEventPayload message. Does not implicitly {@link SessionCreatedEventPayload.verify|verify} messages.
-     * @param message SessionCreatedEventPayload message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encode(message: ISessionCreatedEventPayload, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Encodes the specified SessionCreatedEventPayload message, length delimited. Does not implicitly {@link SessionCreatedEventPayload.verify|verify} messages.
-     * @param message SessionCreatedEventPayload message or plain object to encode
-     * @param [writer] Writer to encode to
-     * @returns Writer
-     */
-    public static encodeDelimited(message: ISessionCreatedEventPayload, writer?: $protobuf.Writer): $protobuf.Writer;
-
-    /**
-     * Decodes a SessionCreatedEventPayload message from the specified reader or buffer.
-     * @param reader Reader or buffer to decode from
-     * @param [length] Message length if known beforehand
-     * @returns SessionCreatedEventPayload
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SessionCreatedEventPayload;
-
-    /**
-     * Decodes a SessionCreatedEventPayload message from the specified reader or buffer, length delimited.
-     * @param reader Reader or buffer to decode from
-     * @returns SessionCreatedEventPayload
-     * @throws {Error} If the payload is not a reader or valid buffer
-     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-     */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SessionCreatedEventPayload;
-
-    /**
-     * Verifies a SessionCreatedEventPayload message.
-     * @param message Plain object to verify
-     * @returns `null` if valid, otherwise the reason why it is not
-     */
-    public static verify(message: { [k: string]: any }): (string|null);
-
-    /**
-     * Creates a SessionCreatedEventPayload message from a plain object. Also converts values to their respective internal types.
-     * @param object Plain object
-     * @returns SessionCreatedEventPayload
-     */
-    public static fromObject(object: { [k: string]: any }): SessionCreatedEventPayload;
-
-    /**
-     * Creates a plain object from a SessionCreatedEventPayload message. Also converts values to other types if specified.
-     * @param message SessionCreatedEventPayload
-     * @param [options] Conversion options
-     * @returns Plain object
-     */
-    public static toObject(message: SessionCreatedEventPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-    /**
-     * Converts this SessionCreatedEventPayload to JSON.
-     * @returns JSON object
-     */
-    public toJSON(): { [k: string]: any };
-}
-
-/** Properties of a SessionUpdatedEventPayload. */
-export interface ISessionUpdatedEventPayload {
-
-    /** SessionUpdatedEventPayload hit */
-    hit?: (session.IHit|null);
-
-    /** SessionUpdatedEventPayload props */
+    /** LogProcessedEventPayload props */
     props?: (session.ISessionProps|null);
 
-    /** SessionUpdatedEventPayload prevProps */
+    /** LogProcessedEventPayload prevProps */
     prevProps?: (session.ISessionProps|null);
 }
 
-/** Represents a SessionUpdatedEventPayload. */
-export class SessionUpdatedEventPayload implements ISessionUpdatedEventPayload {
+/** Represents a LogProcessedEventPayload. */
+export class LogProcessedEventPayload implements ILogProcessedEventPayload {
 
     /**
-     * Constructs a new SessionUpdatedEventPayload.
+     * Constructs a new LogProcessedEventPayload.
      * @param [properties] Properties to set
      */
-    constructor(properties?: ISessionUpdatedEventPayload);
+    constructor(properties?: ILogProcessedEventPayload);
 
-    /** SessionUpdatedEventPayload hit. */
+    /** LogProcessedEventPayload hit. */
     public hit?: (session.IHit|null);
 
-    /** SessionUpdatedEventPayload props. */
+    /** LogProcessedEventPayload props. */
     public props?: (session.ISessionProps|null);
 
-    /** SessionUpdatedEventPayload prevProps. */
+    /** LogProcessedEventPayload prevProps. */
     public prevProps?: (session.ISessionProps|null);
 
     /**
-     * Creates a new SessionUpdatedEventPayload instance using the specified properties.
+     * Creates a new LogProcessedEventPayload instance using the specified properties.
      * @param [properties] Properties to set
-     * @returns SessionUpdatedEventPayload instance
+     * @returns LogProcessedEventPayload instance
      */
-    public static create(properties?: ISessionUpdatedEventPayload): SessionUpdatedEventPayload;
+    public static create(properties?: ILogProcessedEventPayload): LogProcessedEventPayload;
 
     /**
-     * Encodes the specified SessionUpdatedEventPayload message. Does not implicitly {@link SessionUpdatedEventPayload.verify|verify} messages.
-     * @param message SessionUpdatedEventPayload message or plain object to encode
+     * Encodes the specified LogProcessedEventPayload message. Does not implicitly {@link LogProcessedEventPayload.verify|verify} messages.
+     * @param message LogProcessedEventPayload message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encode(message: ISessionUpdatedEventPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encode(message: ILogProcessedEventPayload, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Encodes the specified SessionUpdatedEventPayload message, length delimited. Does not implicitly {@link SessionUpdatedEventPayload.verify|verify} messages.
-     * @param message SessionUpdatedEventPayload message or plain object to encode
+     * Encodes the specified LogProcessedEventPayload message, length delimited. Does not implicitly {@link LogProcessedEventPayload.verify|verify} messages.
+     * @param message LogProcessedEventPayload message or plain object to encode
      * @param [writer] Writer to encode to
      * @returns Writer
      */
-    public static encodeDelimited(message: ISessionUpdatedEventPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+    public static encodeDelimited(message: ILogProcessedEventPayload, writer?: $protobuf.Writer): $protobuf.Writer;
 
     /**
-     * Decodes a SessionUpdatedEventPayload message from the specified reader or buffer.
+     * Decodes a LogProcessedEventPayload message from the specified reader or buffer.
      * @param reader Reader or buffer to decode from
      * @param [length] Message length if known beforehand
-     * @returns SessionUpdatedEventPayload
+     * @returns LogProcessedEventPayload
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SessionUpdatedEventPayload;
+    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): LogProcessedEventPayload;
 
     /**
-     * Decodes a SessionUpdatedEventPayload message from the specified reader or buffer, length delimited.
+     * Decodes a LogProcessedEventPayload message from the specified reader or buffer, length delimited.
      * @param reader Reader or buffer to decode from
-     * @returns SessionUpdatedEventPayload
+     * @returns LogProcessedEventPayload
      * @throws {Error} If the payload is not a reader or valid buffer
      * @throws {$protobuf.util.ProtocolError} If required fields are missing
      */
-    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SessionUpdatedEventPayload;
+    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): LogProcessedEventPayload;
 
     /**
-     * Verifies a SessionUpdatedEventPayload message.
+     * Verifies a LogProcessedEventPayload message.
      * @param message Plain object to verify
      * @returns `null` if valid, otherwise the reason why it is not
      */
     public static verify(message: { [k: string]: any }): (string|null);
 
     /**
-     * Creates a SessionUpdatedEventPayload message from a plain object. Also converts values to their respective internal types.
+     * Creates a LogProcessedEventPayload message from a plain object. Also converts values to their respective internal types.
      * @param object Plain object
-     * @returns SessionUpdatedEventPayload
+     * @returns LogProcessedEventPayload
      */
-    public static fromObject(object: { [k: string]: any }): SessionUpdatedEventPayload;
+    public static fromObject(object: { [k: string]: any }): LogProcessedEventPayload;
 
     /**
-     * Creates a plain object from a SessionUpdatedEventPayload message. Also converts values to other types if specified.
-     * @param message SessionUpdatedEventPayload
+     * Creates a plain object from a LogProcessedEventPayload message. Also converts values to other types if specified.
+     * @param message LogProcessedEventPayload
      * @param [options] Conversion options
      * @returns Plain object
      */
-    public static toObject(message: SessionUpdatedEventPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+    public static toObject(message: LogProcessedEventPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
     /**
-     * Converts this SessionUpdatedEventPayload to JSON.
+     * Converts this LogProcessedEventPayload to JSON.
      * @returns JSON object
      */
     public toJSON(): { [k: string]: any };
