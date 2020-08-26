@@ -1845,6 +1845,8 @@ $root.session = (function() {
          * @property {number|null} [transactionRevenue] Hit transactionRevenue
          * @property {string|null} [productAction] Hit productAction
          * @property {Array.<session.IProduct>|null} [productsList] Hit productsList
+         * @property {Array.<session.ICustomDimension>|null} [customDimensions] Hit customDimensions
+         * @property {Array.<session.ICustomMetric>|null} [customMetrics] Hit customMetrics
          */
 
         /**
@@ -1857,6 +1859,8 @@ $root.session = (function() {
          */
         function Hit(properties) {
             this.productsList = [];
+            this.customDimensions = [];
+            this.customMetrics = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1968,6 +1972,22 @@ $root.session = (function() {
         Hit.prototype.productsList = $util.emptyArray;
 
         /**
+         * Hit customDimensions.
+         * @member {Array.<session.ICustomDimension>} customDimensions
+         * @memberof session.Hit
+         * @instance
+         */
+        Hit.prototype.customDimensions = $util.emptyArray;
+
+        /**
+         * Hit customMetrics.
+         * @member {Array.<session.ICustomMetric>} customMetrics
+         * @memberof session.Hit
+         * @instance
+         */
+        Hit.prototype.customMetrics = $util.emptyArray;
+
+        /**
          * Creates a new Hit instance using the specified properties.
          * @function create
          * @memberof session.Hit
@@ -2018,6 +2038,12 @@ $root.session = (function() {
             if (message.productsList != null && message.productsList.length)
                 for (var i = 0; i < message.productsList.length; ++i)
                     $root.session.Product.encode(message.productsList[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            if (message.customDimensions != null && message.customDimensions.length)
+                for (var i = 0; i < message.customDimensions.length; ++i)
+                    $root.session.CustomDimension.encode(message.customDimensions[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+            if (message.customMetrics != null && message.customMetrics.length)
+                for (var i = 0; i < message.customMetrics.length; ++i)
+                    $root.session.CustomMetric.encode(message.customMetrics[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             return writer;
         };
 
@@ -2092,6 +2118,16 @@ $root.session = (function() {
                     if (!(message.productsList && message.productsList.length))
                         message.productsList = [];
                     message.productsList.push($root.session.Product.decode(reader, reader.uint32()));
+                    break;
+                case 14:
+                    if (!(message.customDimensions && message.customDimensions.length))
+                        message.customDimensions = [];
+                    message.customDimensions.push($root.session.CustomDimension.decode(reader, reader.uint32()));
+                    break;
+                case 15:
+                    if (!(message.customMetrics && message.customMetrics.length))
+                        message.customMetrics = [];
+                    message.customMetrics.push($root.session.CustomMetric.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2173,6 +2209,24 @@ $root.session = (function() {
                         return "productsList." + error;
                 }
             }
+            if (message.customDimensions != null && message.hasOwnProperty("customDimensions")) {
+                if (!Array.isArray(message.customDimensions))
+                    return "customDimensions: array expected";
+                for (var i = 0; i < message.customDimensions.length; ++i) {
+                    var error = $root.session.CustomDimension.verify(message.customDimensions[i]);
+                    if (error)
+                        return "customDimensions." + error;
+                }
+            }
+            if (message.customMetrics != null && message.hasOwnProperty("customMetrics")) {
+                if (!Array.isArray(message.customMetrics))
+                    return "customMetrics: array expected";
+                for (var i = 0; i < message.customMetrics.length; ++i) {
+                    var error = $root.session.CustomMetric.verify(message.customMetrics[i]);
+                    if (error)
+                        return "customMetrics." + error;
+                }
+            }
             return null;
         };
 
@@ -2222,6 +2276,26 @@ $root.session = (function() {
                     message.productsList[i] = $root.session.Product.fromObject(object.productsList[i]);
                 }
             }
+            if (object.customDimensions) {
+                if (!Array.isArray(object.customDimensions))
+                    throw TypeError(".session.Hit.customDimensions: array expected");
+                message.customDimensions = [];
+                for (var i = 0; i < object.customDimensions.length; ++i) {
+                    if (typeof object.customDimensions[i] !== "object")
+                        throw TypeError(".session.Hit.customDimensions: object expected");
+                    message.customDimensions[i] = $root.session.CustomDimension.fromObject(object.customDimensions[i]);
+                }
+            }
+            if (object.customMetrics) {
+                if (!Array.isArray(object.customMetrics))
+                    throw TypeError(".session.Hit.customMetrics: array expected");
+                message.customMetrics = [];
+                for (var i = 0; i < object.customMetrics.length; ++i) {
+                    if (typeof object.customMetrics[i] !== "object")
+                        throw TypeError(".session.Hit.customMetrics: object expected");
+                    message.customMetrics[i] = $root.session.CustomMetric.fromObject(object.customMetrics[i]);
+                }
+            }
             return message;
         };
 
@@ -2238,8 +2312,11 @@ $root.session = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.arrays || options.defaults)
+            if (options.arrays || options.defaults) {
                 object.productsList = [];
+                object.customDimensions = [];
+                object.customMetrics = [];
+            }
             if (options.defaults) {
                 object.time = "";
                 object.type = "";
@@ -2283,6 +2360,16 @@ $root.session = (function() {
                 for (var j = 0; j < message.productsList.length; ++j)
                     object.productsList[j] = $root.session.Product.toObject(message.productsList[j], options);
             }
+            if (message.customDimensions && message.customDimensions.length) {
+                object.customDimensions = [];
+                for (var j = 0; j < message.customDimensions.length; ++j)
+                    object.customDimensions[j] = $root.session.CustomDimension.toObject(message.customDimensions[j], options);
+            }
+            if (message.customMetrics && message.customMetrics.length) {
+                object.customMetrics = [];
+                for (var j = 0; j < message.customMetrics.length; ++j)
+                    object.customMetrics[j] = $root.session.CustomMetric.toObject(message.customMetrics[j], options);
+            }
             return object;
         };
 
@@ -2298,6 +2385,528 @@ $root.session = (function() {
         };
 
         return Hit;
+    })();
+
+    session.CustomDimension = (function() {
+
+        /**
+         * Properties of a CustomDimension.
+         * @memberof session
+         * @interface ICustomDimension
+         * @property {number|null} [index] CustomDimension index
+         * @property {string|null} [name] CustomDimension name
+         * @property {string|null} [value] CustomDimension value
+         * @property {boolean|null} [active] CustomDimension active
+         */
+
+        /**
+         * Constructs a new CustomDimension.
+         * @memberof session
+         * @classdesc Represents a CustomDimension.
+         * @implements ICustomDimension
+         * @constructor
+         * @param {session.ICustomDimension=} [properties] Properties to set
+         */
+        function CustomDimension(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CustomDimension index.
+         * @member {number} index
+         * @memberof session.CustomDimension
+         * @instance
+         */
+        CustomDimension.prototype.index = 0;
+
+        /**
+         * CustomDimension name.
+         * @member {string} name
+         * @memberof session.CustomDimension
+         * @instance
+         */
+        CustomDimension.prototype.name = "";
+
+        /**
+         * CustomDimension value.
+         * @member {string} value
+         * @memberof session.CustomDimension
+         * @instance
+         */
+        CustomDimension.prototype.value = "";
+
+        /**
+         * CustomDimension active.
+         * @member {boolean} active
+         * @memberof session.CustomDimension
+         * @instance
+         */
+        CustomDimension.prototype.active = false;
+
+        /**
+         * Creates a new CustomDimension instance using the specified properties.
+         * @function create
+         * @memberof session.CustomDimension
+         * @static
+         * @param {session.ICustomDimension=} [properties] Properties to set
+         * @returns {session.CustomDimension} CustomDimension instance
+         */
+        CustomDimension.create = function create(properties) {
+            return new CustomDimension(properties);
+        };
+
+        /**
+         * Encodes the specified CustomDimension message. Does not implicitly {@link session.CustomDimension.verify|verify} messages.
+         * @function encode
+         * @memberof session.CustomDimension
+         * @static
+         * @param {session.ICustomDimension} message CustomDimension message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CustomDimension.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.index);
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.value);
+            if (message.active != null && Object.hasOwnProperty.call(message, "active"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.active);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CustomDimension message, length delimited. Does not implicitly {@link session.CustomDimension.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof session.CustomDimension
+         * @static
+         * @param {session.ICustomDimension} message CustomDimension message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CustomDimension.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CustomDimension message from the specified reader or buffer.
+         * @function decode
+         * @memberof session.CustomDimension
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {session.CustomDimension} CustomDimension
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CustomDimension.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.session.CustomDimension();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.index = reader.int32();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                case 3:
+                    message.value = reader.string();
+                    break;
+                case 4:
+                    message.active = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CustomDimension message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof session.CustomDimension
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {session.CustomDimension} CustomDimension
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CustomDimension.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CustomDimension message.
+         * @function verify
+         * @memberof session.CustomDimension
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CustomDimension.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.index != null && message.hasOwnProperty("index"))
+                if (!$util.isInteger(message.index))
+                    return "index: integer expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.value != null && message.hasOwnProperty("value"))
+                if (!$util.isString(message.value))
+                    return "value: string expected";
+            if (message.active != null && message.hasOwnProperty("active"))
+                if (typeof message.active !== "boolean")
+                    return "active: boolean expected";
+            return null;
+        };
+
+        /**
+         * Creates a CustomDimension message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof session.CustomDimension
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {session.CustomDimension} CustomDimension
+         */
+        CustomDimension.fromObject = function fromObject(object) {
+            if (object instanceof $root.session.CustomDimension)
+                return object;
+            var message = new $root.session.CustomDimension();
+            if (object.index != null)
+                message.index = object.index | 0;
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.value != null)
+                message.value = String(object.value);
+            if (object.active != null)
+                message.active = Boolean(object.active);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CustomDimension message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof session.CustomDimension
+         * @static
+         * @param {session.CustomDimension} message CustomDimension
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CustomDimension.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.index = 0;
+                object.name = "";
+                object.value = "";
+                object.active = false;
+            }
+            if (message.index != null && message.hasOwnProperty("index"))
+                object.index = message.index;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.value != null && message.hasOwnProperty("value"))
+                object.value = message.value;
+            if (message.active != null && message.hasOwnProperty("active"))
+                object.active = message.active;
+            return object;
+        };
+
+        /**
+         * Converts this CustomDimension to JSON.
+         * @function toJSON
+         * @memberof session.CustomDimension
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CustomDimension.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CustomDimension;
+    })();
+
+    session.CustomMetric = (function() {
+
+        /**
+         * Properties of a CustomMetric.
+         * @memberof session
+         * @interface ICustomMetric
+         * @property {number|null} [index] CustomMetric index
+         * @property {string|null} [name] CustomMetric name
+         * @property {number|Long|null} [value] CustomMetric value
+         * @property {boolean|null} [active] CustomMetric active
+         */
+
+        /**
+         * Constructs a new CustomMetric.
+         * @memberof session
+         * @classdesc Represents a CustomMetric.
+         * @implements ICustomMetric
+         * @constructor
+         * @param {session.ICustomMetric=} [properties] Properties to set
+         */
+        function CustomMetric(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CustomMetric index.
+         * @member {number} index
+         * @memberof session.CustomMetric
+         * @instance
+         */
+        CustomMetric.prototype.index = 0;
+
+        /**
+         * CustomMetric name.
+         * @member {string} name
+         * @memberof session.CustomMetric
+         * @instance
+         */
+        CustomMetric.prototype.name = "";
+
+        /**
+         * CustomMetric value.
+         * @member {number|Long} value
+         * @memberof session.CustomMetric
+         * @instance
+         */
+        CustomMetric.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * CustomMetric active.
+         * @member {boolean} active
+         * @memberof session.CustomMetric
+         * @instance
+         */
+        CustomMetric.prototype.active = false;
+
+        /**
+         * Creates a new CustomMetric instance using the specified properties.
+         * @function create
+         * @memberof session.CustomMetric
+         * @static
+         * @param {session.ICustomMetric=} [properties] Properties to set
+         * @returns {session.CustomMetric} CustomMetric instance
+         */
+        CustomMetric.create = function create(properties) {
+            return new CustomMetric(properties);
+        };
+
+        /**
+         * Encodes the specified CustomMetric message. Does not implicitly {@link session.CustomMetric.verify|verify} messages.
+         * @function encode
+         * @memberof session.CustomMetric
+         * @static
+         * @param {session.ICustomMetric} message CustomMetric message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CustomMetric.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.index);
+            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.value);
+            if (message.active != null && Object.hasOwnProperty.call(message, "active"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.active);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified CustomMetric message, length delimited. Does not implicitly {@link session.CustomMetric.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof session.CustomMetric
+         * @static
+         * @param {session.ICustomMetric} message CustomMetric message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CustomMetric.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a CustomMetric message from the specified reader or buffer.
+         * @function decode
+         * @memberof session.CustomMetric
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {session.CustomMetric} CustomMetric
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CustomMetric.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.session.CustomMetric();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.index = reader.int32();
+                    break;
+                case 2:
+                    message.name = reader.string();
+                    break;
+                case 3:
+                    message.value = reader.int64();
+                    break;
+                case 4:
+                    message.active = reader.bool();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a CustomMetric message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof session.CustomMetric
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {session.CustomMetric} CustomMetric
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CustomMetric.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a CustomMetric message.
+         * @function verify
+         * @memberof session.CustomMetric
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        CustomMetric.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.index != null && message.hasOwnProperty("index"))
+                if (!$util.isInteger(message.index))
+                    return "index: integer expected";
+            if (message.name != null && message.hasOwnProperty("name"))
+                if (!$util.isString(message.name))
+                    return "name: string expected";
+            if (message.value != null && message.hasOwnProperty("value"))
+                if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
+                    return "value: integer|Long expected";
+            if (message.active != null && message.hasOwnProperty("active"))
+                if (typeof message.active !== "boolean")
+                    return "active: boolean expected";
+            return null;
+        };
+
+        /**
+         * Creates a CustomMetric message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof session.CustomMetric
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {session.CustomMetric} CustomMetric
+         */
+        CustomMetric.fromObject = function fromObject(object) {
+            if (object instanceof $root.session.CustomMetric)
+                return object;
+            var message = new $root.session.CustomMetric();
+            if (object.index != null)
+                message.index = object.index | 0;
+            if (object.name != null)
+                message.name = String(object.name);
+            if (object.value != null)
+                if ($util.Long)
+                    (message.value = $util.Long.fromValue(object.value)).unsigned = false;
+                else if (typeof object.value === "string")
+                    message.value = parseInt(object.value, 10);
+                else if (typeof object.value === "number")
+                    message.value = object.value;
+                else if (typeof object.value === "object")
+                    message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
+            if (object.active != null)
+                message.active = Boolean(object.active);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a CustomMetric message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof session.CustomMetric
+         * @static
+         * @param {session.CustomMetric} message CustomMetric
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        CustomMetric.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.index = 0;
+                object.name = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.value = options.longs === String ? "0" : 0;
+                object.active = false;
+            }
+            if (message.index != null && message.hasOwnProperty("index"))
+                object.index = message.index;
+            if (message.name != null && message.hasOwnProperty("name"))
+                object.name = message.name;
+            if (message.value != null && message.hasOwnProperty("value"))
+                if (typeof message.value === "number")
+                    object.value = options.longs === String ? String(message.value) : message.value;
+                else
+                    object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+            if (message.active != null && message.hasOwnProperty("active"))
+                object.active = message.active;
+            return object;
+        };
+
+        /**
+         * Converts this CustomMetric to JSON.
+         * @function toJSON
+         * @memberof session.CustomMetric
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        CustomMetric.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CustomMetric;
     })();
 
     return session;

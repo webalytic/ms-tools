@@ -76,4 +76,22 @@ message Hit {
   int32 transaction_revenue = 11;
   string product_action =  12;
   repeated Product productsList = 13;
+
+  // ** Custom dimensions and metrics
+  repeated CustomDimension custom_dimensions = 14;
+  repeated CustomMetric custom_metrics = 15;
+}
+
+message CustomDimension {
+  int32 index = 1;
+  string name = 2;
+  string value = 3;
+  bool active = 4;
+}
+
+message CustomMetric {
+  int32 index = 1;
+  string name = 2;
+  int64 value = 3;
+  bool active = 4;
 }

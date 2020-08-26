@@ -763,6 +763,12 @@ export namespace session {
 
         /** Hit productsList */
         productsList?: (session.IProduct[]|null);
+
+        /** Hit customDimensions */
+        customDimensions?: (session.ICustomDimension[]|null);
+
+        /** Hit customMetrics */
+        customMetrics?: (session.ICustomMetric[]|null);
     }
 
     /** Represents a Hit. */
@@ -812,6 +818,12 @@ export namespace session {
 
         /** Hit productsList. */
         public productsList: session.IProduct[];
+
+        /** Hit customDimensions. */
+        public customDimensions: session.ICustomDimension[];
+
+        /** Hit customMetrics. */
+        public customMetrics: session.ICustomMetric[];
 
         /**
          * Creates a new Hit instance using the specified properties.
@@ -879,6 +891,222 @@ export namespace session {
 
         /**
          * Converts this Hit to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CustomDimension. */
+    interface ICustomDimension {
+
+        /** CustomDimension index */
+        index?: (number|null);
+
+        /** CustomDimension name */
+        name?: (string|null);
+
+        /** CustomDimension value */
+        value?: (string|null);
+
+        /** CustomDimension active */
+        active?: (boolean|null);
+    }
+
+    /** Represents a CustomDimension. */
+    class CustomDimension implements ICustomDimension {
+
+        /**
+         * Constructs a new CustomDimension.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: session.ICustomDimension);
+
+        /** CustomDimension index. */
+        public index: number;
+
+        /** CustomDimension name. */
+        public name: string;
+
+        /** CustomDimension value. */
+        public value: string;
+
+        /** CustomDimension active. */
+        public active: boolean;
+
+        /**
+         * Creates a new CustomDimension instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CustomDimension instance
+         */
+        public static create(properties?: session.ICustomDimension): session.CustomDimension;
+
+        /**
+         * Encodes the specified CustomDimension message. Does not implicitly {@link session.CustomDimension.verify|verify} messages.
+         * @param message CustomDimension message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: session.ICustomDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CustomDimension message, length delimited. Does not implicitly {@link session.CustomDimension.verify|verify} messages.
+         * @param message CustomDimension message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: session.ICustomDimension, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CustomDimension message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CustomDimension
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): session.CustomDimension;
+
+        /**
+         * Decodes a CustomDimension message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CustomDimension
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): session.CustomDimension;
+
+        /**
+         * Verifies a CustomDimension message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CustomDimension message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CustomDimension
+         */
+        public static fromObject(object: { [k: string]: any }): session.CustomDimension;
+
+        /**
+         * Creates a plain object from a CustomDimension message. Also converts values to other types if specified.
+         * @param message CustomDimension
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: session.CustomDimension, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CustomDimension to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a CustomMetric. */
+    interface ICustomMetric {
+
+        /** CustomMetric index */
+        index?: (number|null);
+
+        /** CustomMetric name */
+        name?: (string|null);
+
+        /** CustomMetric value */
+        value?: (number|Long|null);
+
+        /** CustomMetric active */
+        active?: (boolean|null);
+    }
+
+    /** Represents a CustomMetric. */
+    class CustomMetric implements ICustomMetric {
+
+        /**
+         * Constructs a new CustomMetric.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: session.ICustomMetric);
+
+        /** CustomMetric index. */
+        public index: number;
+
+        /** CustomMetric name. */
+        public name: string;
+
+        /** CustomMetric value. */
+        public value: (number|Long);
+
+        /** CustomMetric active. */
+        public active: boolean;
+
+        /**
+         * Creates a new CustomMetric instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns CustomMetric instance
+         */
+        public static create(properties?: session.ICustomMetric): session.CustomMetric;
+
+        /**
+         * Encodes the specified CustomMetric message. Does not implicitly {@link session.CustomMetric.verify|verify} messages.
+         * @param message CustomMetric message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: session.ICustomMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CustomMetric message, length delimited. Does not implicitly {@link session.CustomMetric.verify|verify} messages.
+         * @param message CustomMetric message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: session.ICustomMetric, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CustomMetric message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CustomMetric
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): session.CustomMetric;
+
+        /**
+         * Decodes a CustomMetric message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CustomMetric
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): session.CustomMetric;
+
+        /**
+         * Verifies a CustomMetric message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CustomMetric message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CustomMetric
+         */
+        public static fromObject(object: { [k: string]: any }): session.CustomMetric;
+
+        /**
+         * Creates a plain object from a CustomMetric message. Also converts values to other types if specified.
+         * @param message CustomMetric
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: session.CustomMetric, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CustomMetric to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
