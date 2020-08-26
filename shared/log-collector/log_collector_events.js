@@ -2649,7 +2649,7 @@ $root.session = (function() {
          * @interface ICustomMetric
          * @property {number|null} [index] CustomMetric index
          * @property {string|null} [name] CustomMetric name
-         * @property {number|Long|null} [value] CustomMetric value
+         * @property {number|null} [value] CustomMetric value
          * @property {boolean|null} [active] CustomMetric active
          */
 
@@ -2686,11 +2686,11 @@ $root.session = (function() {
 
         /**
          * CustomMetric value.
-         * @member {number|Long} value
+         * @member {number} value
          * @memberof session.CustomMetric
          * @instance
          */
-        CustomMetric.prototype.value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        CustomMetric.prototype.value = 0;
 
         /**
          * CustomMetric active.
@@ -2729,7 +2729,7 @@ $root.session = (function() {
             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
             if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.value);
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.value);
             if (message.active != null && Object.hasOwnProperty.call(message, "active"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.active);
             return writer;
@@ -2773,7 +2773,7 @@ $root.session = (function() {
                     message.name = reader.string();
                     break;
                 case 3:
-                    message.value = reader.int64();
+                    message.value = reader.int32();
                     break;
                 case 4:
                     message.active = reader.bool();
@@ -2820,8 +2820,8 @@ $root.session = (function() {
                 if (!$util.isString(message.name))
                     return "name: string expected";
             if (message.value != null && message.hasOwnProperty("value"))
-                if (!$util.isInteger(message.value) && !(message.value && $util.isInteger(message.value.low) && $util.isInteger(message.value.high)))
-                    return "value: integer|Long expected";
+                if (!$util.isInteger(message.value))
+                    return "value: integer expected";
             if (message.active != null && message.hasOwnProperty("active"))
                 if (typeof message.active !== "boolean")
                     return "active: boolean expected";
@@ -2845,14 +2845,7 @@ $root.session = (function() {
             if (object.name != null)
                 message.name = String(object.name);
             if (object.value != null)
-                if ($util.Long)
-                    (message.value = $util.Long.fromValue(object.value)).unsigned = false;
-                else if (typeof object.value === "string")
-                    message.value = parseInt(object.value, 10);
-                else if (typeof object.value === "number")
-                    message.value = object.value;
-                else if (typeof object.value === "object")
-                    message.value = new $util.LongBits(object.value.low >>> 0, object.value.high >>> 0).toNumber();
+                message.value = object.value | 0;
             if (object.active != null)
                 message.active = Boolean(object.active);
             return message;
@@ -2874,11 +2867,7 @@ $root.session = (function() {
             if (options.defaults) {
                 object.index = 0;
                 object.name = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.value = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.value = options.longs === String ? "0" : 0;
+                object.value = 0;
                 object.active = false;
             }
             if (message.index != null && message.hasOwnProperty("index"))
@@ -2886,10 +2875,7 @@ $root.session = (function() {
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
             if (message.value != null && message.hasOwnProperty("value"))
-                if (typeof message.value === "number")
-                    object.value = options.longs === String ? String(message.value) : message.value;
-                else
-                    object.value = options.longs === String ? $util.Long.prototype.toString.call(message.value) : options.longs === Number ? new $util.LongBits(message.value.low >>> 0, message.value.high >>> 0).toNumber() : message.value;
+                object.value = message.value;
             if (message.active != null && message.hasOwnProperty("active"))
                 object.active = message.active;
             return object;

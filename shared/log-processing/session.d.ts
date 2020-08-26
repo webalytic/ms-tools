@@ -1014,7 +1014,7 @@ export namespace session {
         name?: (string|null);
 
         /** CustomMetric value */
-        value?: (number|Long|null);
+        value?: (number|null);
 
         /** CustomMetric active */
         active?: (boolean|null);
@@ -1036,7 +1036,7 @@ export namespace session {
         public name: string;
 
         /** CustomMetric value. */
-        public value: (number|Long);
+        public value: number;
 
         /** CustomMetric active. */
         public active: boolean;
