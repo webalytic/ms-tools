@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+import public "configuration/custom_definition.proto";
+
+service CustomDefinitionService {
+  rpc ListCustomDefinitions (ListCustomDefinitionsRequest) returns (ListCustomDefinitionsResponse);
+  rpc CreateCustomDefinition (CreateCustomDefinitionRequest) returns (CreateCustomDefinitionResponse);
+  rpc UpdateCustomDefinition (UpdateCustomDefinitionRequest) returns (UpdateCustomDefinitionResponse);
+}
+
+message ListCustomDefinitionsRequest {
+  custom_definition.CustomDefinitionFilter filter = 1; 
+  int32 limit = 2;
+  int32 offset = 3;
+  string order_by = 4; // Example: 'id desc' or 'id:asc,name:desc'
+}
+
+message ListCustomDefinitionsResponse {
+  repeated custom_definition.CustomDefinitionProps custom_definitions = 1;
+  int32 count = 2;
+}
+
+message CreateCustomDefinitionRequest {
+  custom_definition.CreateCustomDefinitionInput data = 1;
+}
+
+message CreateCustomDefinitionResponse {
+  custom_definition.CustomDefinitionProps instance = 1;
+}
+
+message UpdateCustomDefinitionRequest {
+  string id = 1;
+  custom_definition.UpdateCustomDefinitionInput data = 2;
+}
+
+message UpdateCustomDefinitionResponse {
+  custom_definition.CustomDefinitionProps instance = 1;
+}
+
+

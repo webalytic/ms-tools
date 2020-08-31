@@ -252,9 +252,9 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
-"@webalytic/protorepo@webalytic/protorepo#0.3.1":
-  version "0.3.1"
-  resolved "https://codeload.github.com/webalytic/protorepo/tar.gz/eca67e221cf3962873aaeed08fe253bf3673fc13"
+"@webalytic/protorepo@webalytic/protorepo#0.4.0":
+  version "0.4.0"
+  resolved "https://codeload.github.com/webalytic/protorepo/tar.gz/8702fdc72746ddd7084b3afae44b87f42967f032"
 
 abbrev@1:
   version "1.1.1"
