@@ -26,10 +26,11 @@ message CustomDefinitionProps {
 
 message CreateCustomDefinitionInput { 
   string resource_id = 1;
-  CustomDefinitionType type = 2;
-  CustomDefinitionScope scope = 3;
-  string name = 4;
-  bool active = 5;
+  uint32 index = 2;
+  CustomDefinitionType type = 3;
+  CustomDefinitionScope scope = 4;
+  string name = 5;
+  bool active = 6;
 }
 
 message UpdateCustomDefinitionInput { 

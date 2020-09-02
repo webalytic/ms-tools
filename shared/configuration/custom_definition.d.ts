@@ -148,6 +148,9 @@ export namespace custom_definition {
         /** CreateCustomDefinitionInput resourceId */
         resourceId?: (string|null);
 
+        /** CreateCustomDefinitionInput index */
+        index?: (number|null);
+
         /** CreateCustomDefinitionInput type */
         type?: (custom_definition.CustomDefinitionType|null);
 
@@ -172,6 +175,9 @@ export namespace custom_definition {
 
         /** CreateCustomDefinitionInput resourceId. */
         public resourceId: string;
+
+        /** CreateCustomDefinitionInput index. */
+        public index: number;
 
         /** CreateCustomDefinitionInput type. */
         public type: custom_definition.CustomDefinitionType;

@@ -413,6 +413,7 @@ $root.custom_definition = (function() {
          * @memberof custom_definition
          * @interface ICreateCustomDefinitionInput
          * @property {string|null} [resourceId] CreateCustomDefinitionInput resourceId
+         * @property {number|null} [index] CreateCustomDefinitionInput index
          * @property {custom_definition.CustomDefinitionType|null} [type] CreateCustomDefinitionInput type
          * @property {custom_definition.CustomDefinitionScope|null} [scope] CreateCustomDefinitionInput scope
          * @property {string|null} [name] CreateCustomDefinitionInput name
@@ -441,6 +442,14 @@ $root.custom_definition = (function() {
          * @instance
          */
         CreateCustomDefinitionInput.prototype.resourceId = "";
+
+        /**
+         * CreateCustomDefinitionInput index.
+         * @member {number} index
+         * @memberof custom_definition.CreateCustomDefinitionInput
+         * @instance
+         */
+        CreateCustomDefinitionInput.prototype.index = 0;
 
         /**
          * CreateCustomDefinitionInput type.
@@ -500,14 +509,16 @@ $root.custom_definition = (function() {
                 writer = $Writer.create();
             if (message.resourceId != null && Object.hasOwnProperty.call(message, "resourceId"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceId);
+            if (message.index != null && Object.hasOwnProperty.call(message, "index"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.index);
             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
             if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.scope);
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.scope);
             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.name);
             if (message.active != null && Object.hasOwnProperty.call(message, "active"))
-                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.active);
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.active);
             return writer;
         };
 
@@ -546,15 +557,18 @@ $root.custom_definition = (function() {
                     message.resourceId = reader.string();
                     break;
                 case 2:
-                    message.type = reader.int32();
+                    message.index = reader.uint32();
                     break;
                 case 3:
-                    message.scope = reader.int32();
+                    message.type = reader.int32();
                     break;
                 case 4:
-                    message.name = reader.string();
+                    message.scope = reader.int32();
                     break;
                 case 5:
+                    message.name = reader.string();
+                    break;
+                case 6:
                     message.active = reader.bool();
                     break;
                 default:
@@ -595,6 +609,9 @@ $root.custom_definition = (function() {
             if (message.resourceId != null && message.hasOwnProperty("resourceId"))
                 if (!$util.isString(message.resourceId))
                     return "resourceId: string expected";
+            if (message.index != null && message.hasOwnProperty("index"))
+                if (!$util.isInteger(message.index))
+                    return "index: integer expected";
             if (message.type != null && message.hasOwnProperty("type"))
                 switch (message.type) {
                 default:
@@ -636,6 +653,8 @@ $root.custom_definition = (function() {
             var message = new $root.custom_definition.CreateCustomDefinitionInput();
             if (object.resourceId != null)
                 message.resourceId = String(object.resourceId);
+            if (object.index != null)
+                message.index = object.index >>> 0;
             switch (object.type) {
             case "EMPTY_TYPE":
             case 0:
@@ -686,6 +705,7 @@ $root.custom_definition = (function() {
             var object = {};
             if (options.defaults) {
                 object.resourceId = "";
+                object.index = 0;
                 object.type = options.enums === String ? "EMPTY_TYPE" : 0;
                 object.scope = options.enums === String ? "EMPTY_SCOPE" : 0;
                 object.name = "";
@@ -693,6 +713,8 @@ $root.custom_definition = (function() {
             }
             if (message.resourceId != null && message.hasOwnProperty("resourceId"))
                 object.resourceId = message.resourceId;
+            if (message.index != null && message.hasOwnProperty("index"))
+                object.index = message.index;
             if (message.type != null && message.hasOwnProperty("type"))
                 object.type = options.enums === String ? $root.custom_definition.CustomDefinitionType[message.type] : message.type;
             if (message.scope != null && message.hasOwnProperty("scope"))
