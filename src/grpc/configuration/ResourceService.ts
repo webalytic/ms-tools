@@ -4,6 +4,7 @@ import { AddressInfo } from 'net'
 import {
   createServerBase,
   createClientBase,
+  createServiceBase,
   MockRule
 } from '../baseFactories'
 
@@ -30,6 +31,10 @@ export function getAddresInfo(): AddressInfo {
 
 export function createServer(implementation: any): Server {
   return createServerBase(implementation, PROTO_PATHS, SERVICE_NAME)
+}
+
+export function createService(): any {
+  return createServiceBase(PROTO_PATHS, SERVICE_NAME)
 }
 
 export function createClient(): ResourceService {

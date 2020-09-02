@@ -28,6 +28,10 @@ export function createServerBase(implementation: any, paths: string[], serviceNa
   return server
 }
 
+export function createServiceBase(paths: string[], serviceName: string): any {
+  return getProtoDescriptor(paths)[serviceName].service
+}
+
 export function createClientBase<T>(
   serviceStatic: any,
   serviceName: string,
