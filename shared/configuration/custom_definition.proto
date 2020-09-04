@@ -43,4 +43,5 @@ message CustomDefinitionFilter {
   string id = 1;
   string name = 2;
   CustomDefinitionType type = 3;
+  string resource_id = 4;
 }

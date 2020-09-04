@@ -375,6 +375,9 @@ export namespace custom_definition {
 
         /** CustomDefinitionFilter type */
         type?: (custom_definition.CustomDefinitionType|null);
+
+        /** CustomDefinitionFilter resourceId */
+        resourceId?: (string|null);
     }
 
     /** Represents a CustomDefinitionFilter. */
@@ -394,6 +397,9 @@ export namespace custom_definition {
 
         /** CustomDefinitionFilter type. */
         public type: custom_definition.CustomDefinitionType;
+
+        /** CustomDefinitionFilter resourceId. */
+        public resourceId: string;
 
         /**
          * Creates a new CustomDefinitionFilter instance using the specified properties.

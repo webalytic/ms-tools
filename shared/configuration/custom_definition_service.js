@@ -999,6 +999,7 @@ $root.custom_definition = (function() {
          * @property {string|null} [id] CustomDefinitionFilter id
          * @property {string|null} [name] CustomDefinitionFilter name
          * @property {custom_definition.CustomDefinitionType|null} [type] CustomDefinitionFilter type
+         * @property {string|null} [resourceId] CustomDefinitionFilter resourceId
          */
 
         /**
@@ -1041,6 +1042,14 @@ $root.custom_definition = (function() {
         CustomDefinitionFilter.prototype.type = 0;
 
         /**
+         * CustomDefinitionFilter resourceId.
+         * @member {string} resourceId
+         * @memberof custom_definition.CustomDefinitionFilter
+         * @instance
+         */
+        CustomDefinitionFilter.prototype.resourceId = "";
+
+        /**
          * Creates a new CustomDefinitionFilter instance using the specified properties.
          * @function create
          * @memberof custom_definition.CustomDefinitionFilter
@@ -1070,6 +1079,8 @@ $root.custom_definition = (function() {
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+            if (message.resourceId != null && Object.hasOwnProperty.call(message, "resourceId"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.resourceId);
             return writer;
         };
 
@@ -1112,6 +1123,9 @@ $root.custom_definition = (function() {
                     break;
                 case 3:
                     message.type = reader.int32();
+                    break;
+                case 4:
+                    message.resourceId = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1163,6 +1177,9 @@ $root.custom_definition = (function() {
                 case 2:
                     break;
                 }
+            if (message.resourceId != null && message.hasOwnProperty("resourceId"))
+                if (!$util.isString(message.resourceId))
+                    return "resourceId: string expected";
             return null;
         };
 
@@ -1196,6 +1213,8 @@ $root.custom_definition = (function() {
                 message.type = 2;
                 break;
             }
+            if (object.resourceId != null)
+                message.resourceId = String(object.resourceId);
             return message;
         };
 
@@ -1216,6 +1235,7 @@ $root.custom_definition = (function() {
                 object.id = "";
                 object.name = "";
                 object.type = options.enums === String ? "EMPTY_TYPE" : 0;
+                object.resourceId = "";
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
@@ -1223,6 +1243,8 @@ $root.custom_definition = (function() {
                 object.name = message.name;
             if (message.type != null && message.hasOwnProperty("type"))
                 object.type = options.enums === String ? $root.custom_definition.CustomDefinitionType[message.type] : message.type;
+            if (message.resourceId != null && message.hasOwnProperty("resourceId"))
+                object.resourceId = message.resourceId;
             return object;
         };
 
