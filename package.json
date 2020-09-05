@@ -1,6 +1,6 @@
 {
   "name": "@webalytic/ms-tools",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Shared lib, reusable infrastructure classes",
   "scripts": {
     "build": "npm run build:proto && rm -rf lib/* && tsc --project ./tsconfig.json",
@@ -23,7 +23,7 @@
   "dependencies": {
     "@apla/clickhouse": "^1.6.3",
     "@grpc/proto-loader": "^0.5.5",
-    "@webalytic/protorepo": "webalytic/protorepo#0.4.2",
+    "@webalytic/protorepo": "webalytic/protorepo#0.4.3",
     "chai": "^4.2.0",
     "colors": "^1.4.0",
     "fastest-validator": "^1.5.1",

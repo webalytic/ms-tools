@@ -1073,6 +1073,8 @@ $root.session = (function() {
          * @property {session.IDevice|null} [device] SessionProps device
          * @property {session.IGeoNetwork|null} [geoNetwork] SessionProps geoNetwork
          * @property {number|null} [duration] SessionProps duration
+         * @property {Array.<session.ICustomDimension>|null} [customDimensions] SessionProps customDimensions
+         * @property {Array.<session.ICustomMetric>|null} [customMetrics] SessionProps customMetrics
          */
 
         /**
@@ -1084,6 +1086,8 @@ $root.session = (function() {
          * @param {session.ISessionProps=} [properties] Properties to set
          */
         function SessionProps(properties) {
+            this.customDimensions = [];
+            this.customMetrics = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1179,6 +1183,22 @@ $root.session = (function() {
         SessionProps.prototype.duration = 0;
 
         /**
+         * SessionProps customDimensions.
+         * @member {Array.<session.ICustomDimension>} customDimensions
+         * @memberof session.SessionProps
+         * @instance
+         */
+        SessionProps.prototype.customDimensions = $util.emptyArray;
+
+        /**
+         * SessionProps customMetrics.
+         * @member {Array.<session.ICustomMetric>} customMetrics
+         * @memberof session.SessionProps
+         * @instance
+         */
+        SessionProps.prototype.customMetrics = $util.emptyArray;
+
+        /**
          * Creates a new SessionProps instance using the specified properties.
          * @function create
          * @memberof session.SessionProps
@@ -1224,6 +1244,12 @@ $root.session = (function() {
                 $root.session.GeoNetwork.encode(message.geoNetwork, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
                 writer.uint32(/* id 11, wireType 0 =*/88).int32(message.duration);
+            if (message.customDimensions != null && message.customDimensions.length)
+                for (var i = 0; i < message.customDimensions.length; ++i)
+                    $root.session.CustomDimension.encode(message.customDimensions[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+            if (message.customMetrics != null && message.customMetrics.length)
+                for (var i = 0; i < message.customMetrics.length; ++i)
+                    $root.session.CustomMetric.encode(message.customMetrics[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
             return writer;
         };
 
@@ -1290,6 +1316,16 @@ $root.session = (function() {
                     break;
                 case 11:
                     message.duration = reader.int32();
+                    break;
+                case 12:
+                    if (!(message.customDimensions && message.customDimensions.length))
+                        message.customDimensions = [];
+                    message.customDimensions.push($root.session.CustomDimension.decode(reader, reader.uint32()));
+                    break;
+                case 13:
+                    if (!(message.customMetrics && message.customMetrics.length))
+                        message.customMetrics = [];
+                    message.customMetrics.push($root.session.CustomMetric.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1367,6 +1403,24 @@ $root.session = (function() {
             if (message.duration != null && message.hasOwnProperty("duration"))
                 if (!$util.isInteger(message.duration))
                     return "duration: integer expected";
+            if (message.customDimensions != null && message.hasOwnProperty("customDimensions")) {
+                if (!Array.isArray(message.customDimensions))
+                    return "customDimensions: array expected";
+                for (var i = 0; i < message.customDimensions.length; ++i) {
+                    var error = $root.session.CustomDimension.verify(message.customDimensions[i]);
+                    if (error)
+                        return "customDimensions." + error;
+                }
+            }
+            if (message.customMetrics != null && message.hasOwnProperty("customMetrics")) {
+                if (!Array.isArray(message.customMetrics))
+                    return "customMetrics: array expected";
+                for (var i = 0; i < message.customMetrics.length; ++i) {
+                    var error = $root.session.CustomMetric.verify(message.customMetrics[i]);
+                    if (error)
+                        return "customMetrics." + error;
+                }
+            }
             return null;
         };
 
@@ -1416,6 +1470,26 @@ $root.session = (function() {
             }
             if (object.duration != null)
                 message.duration = object.duration | 0;
+            if (object.customDimensions) {
+                if (!Array.isArray(object.customDimensions))
+                    throw TypeError(".session.SessionProps.customDimensions: array expected");
+                message.customDimensions = [];
+                for (var i = 0; i < object.customDimensions.length; ++i) {
+                    if (typeof object.customDimensions[i] !== "object")
+                        throw TypeError(".session.SessionProps.customDimensions: object expected");
+                    message.customDimensions[i] = $root.session.CustomDimension.fromObject(object.customDimensions[i]);
+                }
+            }
+            if (object.customMetrics) {
+                if (!Array.isArray(object.customMetrics))
+                    throw TypeError(".session.SessionProps.customMetrics: array expected");
+                message.customMetrics = [];
+                for (var i = 0; i < object.customMetrics.length; ++i) {
+                    if (typeof object.customMetrics[i] !== "object")
+                        throw TypeError(".session.SessionProps.customMetrics: object expected");
+                    message.customMetrics[i] = $root.session.CustomMetric.fromObject(object.customMetrics[i]);
+                }
+            }
             return message;
         };
 
@@ -1432,6 +1506,10 @@ $root.session = (function() {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults) {
+                object.customDimensions = [];
+                object.customMetrics = [];
+            }
             if (options.defaults) {
                 object.resourceId = "";
                 object.date = "";
@@ -1467,6 +1545,16 @@ $root.session = (function() {
                 object.geoNetwork = $root.session.GeoNetwork.toObject(message.geoNetwork, options);
             if (message.duration != null && message.hasOwnProperty("duration"))
                 object.duration = message.duration;
+            if (message.customDimensions && message.customDimensions.length) {
+                object.customDimensions = [];
+                for (var j = 0; j < message.customDimensions.length; ++j)
+                    object.customDimensions[j] = $root.session.CustomDimension.toObject(message.customDimensions[j], options);
+            }
+            if (message.customMetrics && message.customMetrics.length) {
+                object.customMetrics = [];
+                for (var j = 0; j < message.customMetrics.length; ++j)
+                    object.customMetrics[j] = $root.session.CustomMetric.toObject(message.customMetrics[j], options);
+            }
             return object;
         };
 
@@ -2396,7 +2484,6 @@ $root.session = (function() {
          * @property {number|null} [index] CustomDimension index
          * @property {string|null} [name] CustomDimension name
          * @property {string|null} [value] CustomDimension value
-         * @property {boolean|null} [active] CustomDimension active
          */
 
         /**
@@ -2439,14 +2526,6 @@ $root.session = (function() {
         CustomDimension.prototype.value = "";
 
         /**
-         * CustomDimension active.
-         * @member {boolean} active
-         * @memberof session.CustomDimension
-         * @instance
-         */
-        CustomDimension.prototype.active = false;
-
-        /**
          * Creates a new CustomDimension instance using the specified properties.
          * @function create
          * @memberof session.CustomDimension
@@ -2476,8 +2555,6 @@ $root.session = (function() {
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
             if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.value);
-            if (message.active != null && Object.hasOwnProperty.call(message, "active"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.active);
             return writer;
         };
 
@@ -2520,9 +2597,6 @@ $root.session = (function() {
                     break;
                 case 3:
                     message.value = reader.string();
-                    break;
-                case 4:
-                    message.active = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2568,9 +2642,6 @@ $root.session = (function() {
             if (message.value != null && message.hasOwnProperty("value"))
                 if (!$util.isString(message.value))
                     return "value: string expected";
-            if (message.active != null && message.hasOwnProperty("active"))
-                if (typeof message.active !== "boolean")
-                    return "active: boolean expected";
             return null;
         };
 
@@ -2592,8 +2663,6 @@ $root.session = (function() {
                 message.name = String(object.name);
             if (object.value != null)
                 message.value = String(object.value);
-            if (object.active != null)
-                message.active = Boolean(object.active);
             return message;
         };
 
@@ -2614,7 +2683,6 @@ $root.session = (function() {
                 object.index = 0;
                 object.name = "";
                 object.value = "";
-                object.active = false;
             }
             if (message.index != null && message.hasOwnProperty("index"))
                 object.index = message.index;
@@ -2622,8 +2690,6 @@ $root.session = (function() {
                 object.name = message.name;
             if (message.value != null && message.hasOwnProperty("value"))
                 object.value = message.value;
-            if (message.active != null && message.hasOwnProperty("active"))
-                object.active = message.active;
             return object;
         };
 
@@ -2650,7 +2716,6 @@ $root.session = (function() {
          * @property {number|null} [index] CustomMetric index
          * @property {string|null} [name] CustomMetric name
          * @property {number|null} [value] CustomMetric value
-         * @property {boolean|null} [active] CustomMetric active
          */
 
         /**
@@ -2693,14 +2758,6 @@ $root.session = (function() {
         CustomMetric.prototype.value = 0;
 
         /**
-         * CustomMetric active.
-         * @member {boolean} active
-         * @memberof session.CustomMetric
-         * @instance
-         */
-        CustomMetric.prototype.active = false;
-
-        /**
          * Creates a new CustomMetric instance using the specified properties.
          * @function create
          * @memberof session.CustomMetric
@@ -2730,8 +2787,6 @@ $root.session = (function() {
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
             if (message.value != null && Object.hasOwnProperty.call(message, "value"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.value);
-            if (message.active != null && Object.hasOwnProperty.call(message, "active"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.active);
             return writer;
         };
 
@@ -2774,9 +2829,6 @@ $root.session = (function() {
                     break;
                 case 3:
                     message.value = reader.int32();
-                    break;
-                case 4:
-                    message.active = reader.bool();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2822,9 +2874,6 @@ $root.session = (function() {
             if (message.value != null && message.hasOwnProperty("value"))
                 if (!$util.isInteger(message.value))
                     return "value: integer expected";
-            if (message.active != null && message.hasOwnProperty("active"))
-                if (typeof message.active !== "boolean")
-                    return "active: boolean expected";
             return null;
         };
 
@@ -2846,8 +2895,6 @@ $root.session = (function() {
                 message.name = String(object.name);
             if (object.value != null)
                 message.value = object.value | 0;
-            if (object.active != null)
-                message.active = Boolean(object.active);
             return message;
         };
 
@@ -2868,7 +2915,6 @@ $root.session = (function() {
                 object.index = 0;
                 object.name = "";
                 object.value = 0;
-                object.active = false;
             }
             if (message.index != null && message.hasOwnProperty("index"))
                 object.index = message.index;
@@ -2876,8 +2922,6 @@ $root.session = (function() {
                 object.name = message.name;
             if (message.value != null && message.hasOwnProperty("value"))
                 object.value = message.value;
-            if (message.active != null && message.hasOwnProperty("active"))
-                object.active = message.active;
             return object;
         };
 

@@ -43,6 +43,8 @@ message SessionProps {
   Device device = 9; 
   GeoNetwork geoNetwork = 10;
   int32 duration = 11;
+  repeated CustomDimension custom_dimensions = 12;
+  repeated CustomMetric custom_metrics = 13;
 }
 
 message Product {
@@ -86,12 +88,10 @@ message CustomDimension {
   int32 index = 1;
   string name = 2;
   string value = 3;
-  bool active = 4;
 }
 
 message CustomMetric {
   int32 index = 1;
   string name = 2;
   int32 value = 3;
-  bool active = 4;
 }

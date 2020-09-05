@@ -475,6 +475,12 @@ export namespace session {
 
         /** SessionProps duration */
         duration?: (number|null);
+
+        /** SessionProps customDimensions */
+        customDimensions?: (session.ICustomDimension[]|null);
+
+        /** SessionProps customMetrics */
+        customMetrics?: (session.ICustomMetric[]|null);
     }
 
     /** Represents a SessionProps. */
@@ -518,6 +524,12 @@ export namespace session {
 
         /** SessionProps duration. */
         public duration: number;
+
+        /** SessionProps customDimensions. */
+        public customDimensions: session.ICustomDimension[];
+
+        /** SessionProps customMetrics. */
+        public customMetrics: session.ICustomMetric[];
 
         /**
          * Creates a new SessionProps instance using the specified properties.
@@ -907,9 +919,6 @@ export namespace session {
 
         /** CustomDimension value */
         value?: (string|null);
-
-        /** CustomDimension active */
-        active?: (boolean|null);
     }
 
     /** Represents a CustomDimension. */
@@ -929,9 +938,6 @@ export namespace session {
 
         /** CustomDimension value. */
         public value: string;
-
-        /** CustomDimension active. */
-        public active: boolean;
 
         /**
          * Creates a new CustomDimension instance using the specified properties.
@@ -1015,9 +1021,6 @@ export namespace session {
 
         /** CustomMetric value */
         value?: (number|null);
-
-        /** CustomMetric active */
-        active?: (boolean|null);
     }
 
     /** Represents a CustomMetric. */
@@ -1037,9 +1040,6 @@ export namespace session {
 
         /** CustomMetric value. */
         public value: number;
-
-        /** CustomMetric active. */
-        public active: boolean;
 
         /**
          * Creates a new CustomMetric instance using the specified properties.
