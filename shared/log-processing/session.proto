@@ -9,16 +9,16 @@ message SessionTotals {
 }
 
 message TrafficSource {
-  string source = 1; 
-  string campaign = 2; 
-  string medium = 3; 
-  string keyword = 4; 
-  string content = 5; 
-  string referral_path = 6; 
+  string source = 1;
+  string campaign = 2;
+  string medium = 3;
+  string keyword = 4;
+  string content = 5;
+  string referral_path = 6;
 }
 
 message Device {
-  string browser = 1; 
+  string browser = 1;
   string browser_version = 2;
   string operating_system = 3;
   string operating_system_version = 4;
@@ -31,20 +31,21 @@ message GeoNetwork {
   string city = 3;
 }
 
-message SessionProps { 
+message SessionProps {
   string resource_id = 1;
-  string date = 2; 
-  string user_id = 3;
-  string client_id = 4;
-  string session_id = 5;
-  string session_start_time = 6; 
-  SessionTotals totals = 7;
-  TrafficSource traffic_source = 8;
-  Device device = 9; 
-  GeoNetwork geoNetwork = 10;
-  int32 duration = 11;
-  repeated CustomDimension custom_dimensions = 12;
-  repeated CustomMetric custom_metrics = 13;
+  string date = 2;
+  string user_id = 4;
+  string client_id = 5;
+  string session_id = 6;
+  string session_start_time = 7;
+  uint32 session_start_timestamp = 8;
+  SessionTotals totals = 9;
+  TrafficSource traffic_source = 10;
+  Device device = 11;
+  GeoNetwork geoNetwork = 12;
+  int32 duration = 13;
+  repeated CustomDimension custom_dimensions = 14;
+  repeated CustomMetric custom_metrics = 15;
 }
 
 message Product {
@@ -60,28 +61,29 @@ message Product {
 
 message Hit {
   string time = 1;
-  string type = 2;
-  string data_source = 3;
+  uint32 timestamp = 2;
+  string type = 3;
+  string data_source = 4;
 
   // ** Pageview
-  string page_url = 4;
+  string page_url = 5;
 
   // ** Events
-  string event_category = 5;
-  string event_action = 6;
-  string event_label = 7;
-  int32 event_value = 8;
+  string event_category = 6;
+  string event_action = 7;
+  string event_label = 8;
+  int32 event_value = 9;
 
   // ** Enhanced E-Commerce
-  string transaction_id = 9;
-  string transaction_affiliation = 10;
-  int32 transaction_revenue = 11;
-  string product_action =  12;
-  repeated Product productsList = 13;
+  string transaction_id = 10;
+  string transaction_affiliation = 11;
+  int32 transaction_revenue = 12;
+  string product_action =  13;
+  repeated Product productsList = 14;
 
   // ** Custom dimensions and metrics
-  repeated CustomDimension custom_dimensions = 14;
-  repeated CustomMetric custom_metrics = 15;
+  repeated CustomDimension custom_dimensions = 15;
+  repeated CustomMetric custom_metrics = 16;
 }
 
 message CustomDimension {

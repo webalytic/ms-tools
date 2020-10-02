@@ -461,6 +461,9 @@ export namespace session {
         /** SessionProps sessionStartTime */
         sessionStartTime?: (string|null);
 
+        /** SessionProps sessionStartTimestamp */
+        sessionStartTimestamp?: (number|null);
+
         /** SessionProps totals */
         totals?: (session.ISessionTotals|null);
 
@@ -509,6 +512,9 @@ export namespace session {
 
         /** SessionProps sessionStartTime. */
         public sessionStartTime: string;
+
+        /** SessionProps sessionStartTimestamp. */
+        public sessionStartTimestamp: number;
 
         /** SessionProps totals. */
         public totals?: (session.ISessionTotals|null);
@@ -740,6 +746,9 @@ export namespace session {
         /** Hit time */
         time?: (string|null);
 
+        /** Hit timestamp */
+        timestamp?: (number|null);
+
         /** Hit type */
         type?: (string|null);
 
@@ -794,6 +803,9 @@ export namespace session {
 
         /** Hit time. */
         public time: string;
+
+        /** Hit timestamp. */
+        public timestamp: number;
 
         /** Hit type. */
         public type: string;

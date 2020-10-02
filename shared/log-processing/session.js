@@ -1068,6 +1068,7 @@ $root.session = (function() {
          * @property {string|null} [clientId] SessionProps clientId
          * @property {string|null} [sessionId] SessionProps sessionId
          * @property {string|null} [sessionStartTime] SessionProps sessionStartTime
+         * @property {number|null} [sessionStartTimestamp] SessionProps sessionStartTimestamp
          * @property {session.ISessionTotals|null} [totals] SessionProps totals
          * @property {session.ITrafficSource|null} [trafficSource] SessionProps trafficSource
          * @property {session.IDevice|null} [device] SessionProps device
@@ -1141,6 +1142,14 @@ $root.session = (function() {
          * @instance
          */
         SessionProps.prototype.sessionStartTime = "";
+
+        /**
+         * SessionProps sessionStartTimestamp.
+         * @member {number} sessionStartTimestamp
+         * @memberof session.SessionProps
+         * @instance
+         */
+        SessionProps.prototype.sessionStartTimestamp = 0;
 
         /**
          * SessionProps totals.
@@ -1227,29 +1236,31 @@ $root.session = (function() {
             if (message.date != null && Object.hasOwnProperty.call(message, "date"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.date);
             if (message.userId != null && Object.hasOwnProperty.call(message, "userId"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.userId);
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.userId);
             if (message.clientId != null && Object.hasOwnProperty.call(message, "clientId"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.clientId);
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.clientId);
             if (message.sessionId != null && Object.hasOwnProperty.call(message, "sessionId"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.sessionId);
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.sessionId);
             if (message.sessionStartTime != null && Object.hasOwnProperty.call(message, "sessionStartTime"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.sessionStartTime);
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.sessionStartTime);
+            if (message.sessionStartTimestamp != null && Object.hasOwnProperty.call(message, "sessionStartTimestamp"))
+                writer.uint32(/* id 8, wireType 0 =*/64).uint32(message.sessionStartTimestamp);
             if (message.totals != null && Object.hasOwnProperty.call(message, "totals"))
-                $root.session.SessionTotals.encode(message.totals, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                $root.session.SessionTotals.encode(message.totals, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             if (message.trafficSource != null && Object.hasOwnProperty.call(message, "trafficSource"))
-                $root.session.TrafficSource.encode(message.trafficSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                $root.session.TrafficSource.encode(message.trafficSource, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             if (message.device != null && Object.hasOwnProperty.call(message, "device"))
-                $root.session.Device.encode(message.device, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                $root.session.Device.encode(message.device, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             if (message.geoNetwork != null && Object.hasOwnProperty.call(message, "geoNetwork"))
-                $root.session.GeoNetwork.encode(message.geoNetwork, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                $root.session.GeoNetwork.encode(message.geoNetwork, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
             if (message.duration != null && Object.hasOwnProperty.call(message, "duration"))
-                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.duration);
+                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.duration);
             if (message.customDimensions != null && message.customDimensions.length)
                 for (var i = 0; i < message.customDimensions.length; ++i)
-                    $root.session.CustomDimension.encode(message.customDimensions[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                    $root.session.CustomDimension.encode(message.customDimensions[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
             if (message.customMetrics != null && message.customMetrics.length)
                 for (var i = 0; i < message.customMetrics.length; ++i)
-                    $root.session.CustomMetric.encode(message.customMetrics[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                    $root.session.CustomMetric.encode(message.customMetrics[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             return writer;
         };
 
@@ -1290,39 +1301,42 @@ $root.session = (function() {
                 case 2:
                     message.date = reader.string();
                     break;
-                case 3:
+                case 4:
                     message.userId = reader.string();
                     break;
-                case 4:
+                case 5:
                     message.clientId = reader.string();
                     break;
-                case 5:
+                case 6:
                     message.sessionId = reader.string();
                     break;
-                case 6:
+                case 7:
                     message.sessionStartTime = reader.string();
                     break;
-                case 7:
-                    message.totals = $root.session.SessionTotals.decode(reader, reader.uint32());
-                    break;
                 case 8:
-                    message.trafficSource = $root.session.TrafficSource.decode(reader, reader.uint32());
+                    message.sessionStartTimestamp = reader.uint32();
                     break;
                 case 9:
-                    message.device = $root.session.Device.decode(reader, reader.uint32());
+                    message.totals = $root.session.SessionTotals.decode(reader, reader.uint32());
                     break;
                 case 10:
-                    message.geoNetwork = $root.session.GeoNetwork.decode(reader, reader.uint32());
+                    message.trafficSource = $root.session.TrafficSource.decode(reader, reader.uint32());
                     break;
                 case 11:
-                    message.duration = reader.int32();
+                    message.device = $root.session.Device.decode(reader, reader.uint32());
                     break;
                 case 12:
+                    message.geoNetwork = $root.session.GeoNetwork.decode(reader, reader.uint32());
+                    break;
+                case 13:
+                    message.duration = reader.int32();
+                    break;
+                case 14:
                     if (!(message.customDimensions && message.customDimensions.length))
                         message.customDimensions = [];
                     message.customDimensions.push($root.session.CustomDimension.decode(reader, reader.uint32()));
                     break;
-                case 13:
+                case 15:
                     if (!(message.customMetrics && message.customMetrics.length))
                         message.customMetrics = [];
                     message.customMetrics.push($root.session.CustomMetric.decode(reader, reader.uint32()));
@@ -1380,6 +1394,9 @@ $root.session = (function() {
             if (message.sessionStartTime != null && message.hasOwnProperty("sessionStartTime"))
                 if (!$util.isString(message.sessionStartTime))
                     return "sessionStartTime: string expected";
+            if (message.sessionStartTimestamp != null && message.hasOwnProperty("sessionStartTimestamp"))
+                if (!$util.isInteger(message.sessionStartTimestamp))
+                    return "sessionStartTimestamp: integer expected";
             if (message.totals != null && message.hasOwnProperty("totals")) {
                 var error = $root.session.SessionTotals.verify(message.totals);
                 if (error)
@@ -1448,6 +1465,8 @@ $root.session = (function() {
                 message.sessionId = String(object.sessionId);
             if (object.sessionStartTime != null)
                 message.sessionStartTime = String(object.sessionStartTime);
+            if (object.sessionStartTimestamp != null)
+                message.sessionStartTimestamp = object.sessionStartTimestamp >>> 0;
             if (object.totals != null) {
                 if (typeof object.totals !== "object")
                     throw TypeError(".session.SessionProps.totals: object expected");
@@ -1517,6 +1536,7 @@ $root.session = (function() {
                 object.clientId = "";
                 object.sessionId = "";
                 object.sessionStartTime = "";
+                object.sessionStartTimestamp = 0;
                 object.totals = null;
                 object.trafficSource = null;
                 object.device = null;
@@ -1535,6 +1555,8 @@ $root.session = (function() {
                 object.sessionId = message.sessionId;
             if (message.sessionStartTime != null && message.hasOwnProperty("sessionStartTime"))
                 object.sessionStartTime = message.sessionStartTime;
+            if (message.sessionStartTimestamp != null && message.hasOwnProperty("sessionStartTimestamp"))
+                object.sessionStartTimestamp = message.sessionStartTimestamp;
             if (message.totals != null && message.hasOwnProperty("totals"))
                 object.totals = $root.session.SessionTotals.toObject(message.totals, options);
             if (message.trafficSource != null && message.hasOwnProperty("trafficSource"))
@@ -1921,6 +1943,7 @@ $root.session = (function() {
          * @memberof session
          * @interface IHit
          * @property {string|null} [time] Hit time
+         * @property {number|null} [timestamp] Hit timestamp
          * @property {string|null} [type] Hit type
          * @property {string|null} [dataSource] Hit dataSource
          * @property {string|null} [pageUrl] Hit pageUrl
@@ -1962,6 +1985,14 @@ $root.session = (function() {
          * @instance
          */
         Hit.prototype.time = "";
+
+        /**
+         * Hit timestamp.
+         * @member {number} timestamp
+         * @memberof session.Hit
+         * @instance
+         */
+        Hit.prototype.timestamp = 0;
 
         /**
          * Hit type.
@@ -2101,37 +2132,39 @@ $root.session = (function() {
                 writer = $Writer.create();
             if (message.time != null && Object.hasOwnProperty.call(message, "time"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.time);
+            if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
+                writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.timestamp);
             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.type);
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.type);
             if (message.dataSource != null && Object.hasOwnProperty.call(message, "dataSource"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.dataSource);
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.dataSource);
             if (message.pageUrl != null && Object.hasOwnProperty.call(message, "pageUrl"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageUrl);
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageUrl);
             if (message.eventCategory != null && Object.hasOwnProperty.call(message, "eventCategory"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.eventCategory);
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.eventCategory);
             if (message.eventAction != null && Object.hasOwnProperty.call(message, "eventAction"))
-                writer.uint32(/* id 6, wireType 2 =*/50).string(message.eventAction);
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.eventAction);
             if (message.eventLabel != null && Object.hasOwnProperty.call(message, "eventLabel"))
-                writer.uint32(/* id 7, wireType 2 =*/58).string(message.eventLabel);
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.eventLabel);
             if (message.eventValue != null && Object.hasOwnProperty.call(message, "eventValue"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.eventValue);
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.eventValue);
             if (message.transactionId != null && Object.hasOwnProperty.call(message, "transactionId"))
-                writer.uint32(/* id 9, wireType 2 =*/74).string(message.transactionId);
+                writer.uint32(/* id 10, wireType 2 =*/82).string(message.transactionId);
             if (message.transactionAffiliation != null && Object.hasOwnProperty.call(message, "transactionAffiliation"))
-                writer.uint32(/* id 10, wireType 2 =*/82).string(message.transactionAffiliation);
+                writer.uint32(/* id 11, wireType 2 =*/90).string(message.transactionAffiliation);
             if (message.transactionRevenue != null && Object.hasOwnProperty.call(message, "transactionRevenue"))
-                writer.uint32(/* id 11, wireType 0 =*/88).int32(message.transactionRevenue);
+                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.transactionRevenue);
             if (message.productAction != null && Object.hasOwnProperty.call(message, "productAction"))
-                writer.uint32(/* id 12, wireType 2 =*/98).string(message.productAction);
+                writer.uint32(/* id 13, wireType 2 =*/106).string(message.productAction);
             if (message.productsList != null && message.productsList.length)
                 for (var i = 0; i < message.productsList.length; ++i)
-                    $root.session.Product.encode(message.productsList[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                    $root.session.Product.encode(message.productsList[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
             if (message.customDimensions != null && message.customDimensions.length)
                 for (var i = 0; i < message.customDimensions.length; ++i)
-                    $root.session.CustomDimension.encode(message.customDimensions[i], writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                    $root.session.CustomDimension.encode(message.customDimensions[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             if (message.customMetrics != null && message.customMetrics.length)
                 for (var i = 0; i < message.customMetrics.length; ++i)
-                    $root.session.CustomMetric.encode(message.customMetrics[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                    $root.session.CustomMetric.encode(message.customMetrics[i], writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             return writer;
         };
 
@@ -2170,49 +2203,52 @@ $root.session = (function() {
                     message.time = reader.string();
                     break;
                 case 2:
-                    message.type = reader.string();
+                    message.timestamp = reader.uint32();
                     break;
                 case 3:
-                    message.dataSource = reader.string();
+                    message.type = reader.string();
                     break;
                 case 4:
-                    message.pageUrl = reader.string();
+                    message.dataSource = reader.string();
                     break;
                 case 5:
-                    message.eventCategory = reader.string();
+                    message.pageUrl = reader.string();
                     break;
                 case 6:
-                    message.eventAction = reader.string();
+                    message.eventCategory = reader.string();
                     break;
                 case 7:
-                    message.eventLabel = reader.string();
+                    message.eventAction = reader.string();
                     break;
                 case 8:
-                    message.eventValue = reader.int32();
+                    message.eventLabel = reader.string();
                     break;
                 case 9:
-                    message.transactionId = reader.string();
+                    message.eventValue = reader.int32();
                     break;
                 case 10:
-                    message.transactionAffiliation = reader.string();
+                    message.transactionId = reader.string();
                     break;
                 case 11:
-                    message.transactionRevenue = reader.int32();
+                    message.transactionAffiliation = reader.string();
                     break;
                 case 12:
-                    message.productAction = reader.string();
+                    message.transactionRevenue = reader.int32();
                     break;
                 case 13:
+                    message.productAction = reader.string();
+                    break;
+                case 14:
                     if (!(message.productsList && message.productsList.length))
                         message.productsList = [];
                     message.productsList.push($root.session.Product.decode(reader, reader.uint32()));
                     break;
-                case 14:
+                case 15:
                     if (!(message.customDimensions && message.customDimensions.length))
                         message.customDimensions = [];
                     message.customDimensions.push($root.session.CustomDimension.decode(reader, reader.uint32()));
                     break;
-                case 15:
+                case 16:
                     if (!(message.customMetrics && message.customMetrics.length))
                         message.customMetrics = [];
                     message.customMetrics.push($root.session.CustomMetric.decode(reader, reader.uint32()));
@@ -2255,6 +2291,9 @@ $root.session = (function() {
             if (message.time != null && message.hasOwnProperty("time"))
                 if (!$util.isString(message.time))
                     return "time: string expected";
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (!$util.isInteger(message.timestamp))
+                    return "timestamp: integer expected";
             if (message.type != null && message.hasOwnProperty("type"))
                 if (!$util.isString(message.type))
                     return "type: string expected";
@@ -2332,6 +2371,8 @@ $root.session = (function() {
             var message = new $root.session.Hit();
             if (object.time != null)
                 message.time = String(object.time);
+            if (object.timestamp != null)
+                message.timestamp = object.timestamp >>> 0;
             if (object.type != null)
                 message.type = String(object.type);
             if (object.dataSource != null)
@@ -2407,6 +2448,7 @@ $root.session = (function() {
             }
             if (options.defaults) {
                 object.time = "";
+                object.timestamp = 0;
                 object.type = "";
                 object.dataSource = "";
                 object.pageUrl = "";
@@ -2421,6 +2463,8 @@ $root.session = (function() {
             }
             if (message.time != null && message.hasOwnProperty("time"))
                 object.time = message.time;
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                object.timestamp = message.timestamp;
             if (message.type != null && message.hasOwnProperty("type"))
                 object.type = message.type;
             if (message.dataSource != null && message.hasOwnProperty("dataSource"))
