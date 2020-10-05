@@ -461,9 +461,6 @@ export namespace session {
         /** SessionProps sessionStartTime */
         sessionStartTime?: (string|null);
 
-        /** SessionProps sessionStartTimestamp */
-        sessionStartTimestamp?: (number|null);
-
         /** SessionProps totals */
         totals?: (session.ISessionTotals|null);
 
@@ -484,6 +481,9 @@ export namespace session {
 
         /** SessionProps customMetrics */
         customMetrics?: (session.ICustomMetric[]|null);
+
+        /** SessionProps sessionStartTimestamp */
+        sessionStartTimestamp?: (number|null);
     }
 
     /** Represents a SessionProps. */
@@ -513,9 +513,6 @@ export namespace session {
         /** SessionProps sessionStartTime. */
         public sessionStartTime: string;
 
-        /** SessionProps sessionStartTimestamp. */
-        public sessionStartTimestamp: number;
-
         /** SessionProps totals. */
         public totals?: (session.ISessionTotals|null);
 
@@ -536,6 +533,9 @@ export namespace session {
 
         /** SessionProps customMetrics. */
         public customMetrics: session.ICustomMetric[];
+
+        /** SessionProps sessionStartTimestamp. */
+        public sessionStartTimestamp: number;
 
         /**
          * Creates a new SessionProps instance using the specified properties.
@@ -746,9 +746,6 @@ export namespace session {
         /** Hit time */
         time?: (string|null);
 
-        /** Hit timestamp */
-        timestamp?: (number|null);
-
         /** Hit type */
         type?: (string|null);
 
@@ -790,6 +787,9 @@ export namespace session {
 
         /** Hit customMetrics */
         customMetrics?: (session.ICustomMetric[]|null);
+
+        /** Hit timestamp */
+        timestamp?: (number|null);
     }
 
     /** Represents a Hit. */
@@ -803,9 +803,6 @@ export namespace session {
 
         /** Hit time. */
         public time: string;
-
-        /** Hit timestamp. */
-        public timestamp: number;
 
         /** Hit type. */
         public type: string;
@@ -848,6 +845,9 @@ export namespace session {
 
         /** Hit customMetrics. */
         public customMetrics: session.ICustomMetric[];
+
+        /** Hit timestamp. */
+        public timestamp: number;
 
         /**
          * Creates a new Hit instance using the specified properties.
