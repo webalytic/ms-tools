@@ -481,6 +481,9 @@ export namespace session {
 
         /** SessionProps customMetrics */
         customMetrics?: (session.ICustomMetric[]|null);
+
+        /** SessionProps sessionStartTimestamp */
+        sessionStartTimestamp?: (number|null);
     }
 
     /** Represents a SessionProps. */
@@ -530,6 +533,9 @@ export namespace session {
 
         /** SessionProps customMetrics. */
         public customMetrics: session.ICustomMetric[];
+
+        /** SessionProps sessionStartTimestamp. */
+        public sessionStartTimestamp: number;
 
         /**
          * Creates a new SessionProps instance using the specified properties.
@@ -781,6 +787,9 @@ export namespace session {
 
         /** Hit customMetrics */
         customMetrics?: (session.ICustomMetric[]|null);
+
+        /** Hit timestamp */
+        timestamp?: (number|null);
     }
 
     /** Represents a Hit. */
@@ -836,6 +845,9 @@ export namespace session {
 
         /** Hit customMetrics. */
         public customMetrics: session.ICustomMetric[];
+
+        /** Hit timestamp. */
+        public timestamp: number;
 
         /**
          * Creates a new Hit instance using the specified properties.

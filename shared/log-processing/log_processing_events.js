@@ -1075,6 +1075,7 @@ $root.session = (function() {
          * @property {number|null} [duration] SessionProps duration
          * @property {Array.<session.ICustomDimension>|null} [customDimensions] SessionProps customDimensions
          * @property {Array.<session.ICustomMetric>|null} [customMetrics] SessionProps customMetrics
+         * @property {number|null} [sessionStartTimestamp] SessionProps sessionStartTimestamp
          */
 
         /**
@@ -1199,6 +1200,14 @@ $root.session = (function() {
         SessionProps.prototype.customMetrics = $util.emptyArray;
 
         /**
+         * SessionProps sessionStartTimestamp.
+         * @member {number} sessionStartTimestamp
+         * @memberof session.SessionProps
+         * @instance
+         */
+        SessionProps.prototype.sessionStartTimestamp = 0;
+
+        /**
          * Creates a new SessionProps instance using the specified properties.
          * @function create
          * @memberof session.SessionProps
@@ -1250,6 +1259,8 @@ $root.session = (function() {
             if (message.customMetrics != null && message.customMetrics.length)
                 for (var i = 0; i < message.customMetrics.length; ++i)
                     $root.session.CustomMetric.encode(message.customMetrics[i], writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+            if (message.sessionStartTimestamp != null && Object.hasOwnProperty.call(message, "sessionStartTimestamp"))
+                writer.uint32(/* id 14, wireType 0 =*/112).uint32(message.sessionStartTimestamp);
             return writer;
         };
 
@@ -1326,6 +1337,9 @@ $root.session = (function() {
                     if (!(message.customMetrics && message.customMetrics.length))
                         message.customMetrics = [];
                     message.customMetrics.push($root.session.CustomMetric.decode(reader, reader.uint32()));
+                    break;
+                case 14:
+                    message.sessionStartTimestamp = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -1421,6 +1435,9 @@ $root.session = (function() {
                         return "customMetrics." + error;
                 }
             }
+            if (message.sessionStartTimestamp != null && message.hasOwnProperty("sessionStartTimestamp"))
+                if (!$util.isInteger(message.sessionStartTimestamp))
+                    return "sessionStartTimestamp: integer expected";
             return null;
         };
 
@@ -1490,6 +1507,8 @@ $root.session = (function() {
                     message.customMetrics[i] = $root.session.CustomMetric.fromObject(object.customMetrics[i]);
                 }
             }
+            if (object.sessionStartTimestamp != null)
+                message.sessionStartTimestamp = object.sessionStartTimestamp >>> 0;
             return message;
         };
 
@@ -1522,6 +1541,7 @@ $root.session = (function() {
                 object.device = null;
                 object.geoNetwork = null;
                 object.duration = 0;
+                object.sessionStartTimestamp = 0;
             }
             if (message.resourceId != null && message.hasOwnProperty("resourceId"))
                 object.resourceId = message.resourceId;
@@ -1555,6 +1575,8 @@ $root.session = (function() {
                 for (var j = 0; j < message.customMetrics.length; ++j)
                     object.customMetrics[j] = $root.session.CustomMetric.toObject(message.customMetrics[j], options);
             }
+            if (message.sessionStartTimestamp != null && message.hasOwnProperty("sessionStartTimestamp"))
+                object.sessionStartTimestamp = message.sessionStartTimestamp;
             return object;
         };
 
@@ -1935,6 +1957,7 @@ $root.session = (function() {
          * @property {Array.<session.IProduct>|null} [productsList] Hit productsList
          * @property {Array.<session.ICustomDimension>|null} [customDimensions] Hit customDimensions
          * @property {Array.<session.ICustomMetric>|null} [customMetrics] Hit customMetrics
+         * @property {number|null} [timestamp] Hit timestamp
          */
 
         /**
@@ -2076,6 +2099,14 @@ $root.session = (function() {
         Hit.prototype.customMetrics = $util.emptyArray;
 
         /**
+         * Hit timestamp.
+         * @member {number} timestamp
+         * @memberof session.Hit
+         * @instance
+         */
+        Hit.prototype.timestamp = 0;
+
+        /**
          * Creates a new Hit instance using the specified properties.
          * @function create
          * @memberof session.Hit
@@ -2132,6 +2163,8 @@ $root.session = (function() {
             if (message.customMetrics != null && message.customMetrics.length)
                 for (var i = 0; i < message.customMetrics.length; ++i)
                     $root.session.CustomMetric.encode(message.customMetrics[i], writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+            if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
+                writer.uint32(/* id 16, wireType 0 =*/128).uint32(message.timestamp);
             return writer;
         };
 
@@ -2216,6 +2249,9 @@ $root.session = (function() {
                     if (!(message.customMetrics && message.customMetrics.length))
                         message.customMetrics = [];
                     message.customMetrics.push($root.session.CustomMetric.decode(reader, reader.uint32()));
+                    break;
+                case 16:
+                    message.timestamp = reader.uint32();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -2315,6 +2351,9 @@ $root.session = (function() {
                         return "customMetrics." + error;
                 }
             }
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                if (!$util.isInteger(message.timestamp))
+                    return "timestamp: integer expected";
             return null;
         };
 
@@ -2384,6 +2423,8 @@ $root.session = (function() {
                     message.customMetrics[i] = $root.session.CustomMetric.fromObject(object.customMetrics[i]);
                 }
             }
+            if (object.timestamp != null)
+                message.timestamp = object.timestamp >>> 0;
             return message;
         };
 
@@ -2418,6 +2459,7 @@ $root.session = (function() {
                 object.transactionAffiliation = "";
                 object.transactionRevenue = 0;
                 object.productAction = "";
+                object.timestamp = 0;
             }
             if (message.time != null && message.hasOwnProperty("time"))
                 object.time = message.time;
@@ -2458,6 +2500,8 @@ $root.session = (function() {
                 for (var j = 0; j < message.customMetrics.length; ++j)
                     object.customMetrics[j] = $root.session.CustomMetric.toObject(message.customMetrics[j], options);
             }
+            if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                object.timestamp = message.timestamp;
             return object;
         };
 
